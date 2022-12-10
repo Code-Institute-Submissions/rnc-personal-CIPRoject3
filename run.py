@@ -65,7 +65,7 @@ def med_weighted_dice_roll():
     Dice roll with a weighting of 1/24
     """
     roll_24 = randint(1, 24)
-    print(f"You scored a {roll_24 }")
+    # print(f"You scored a {roll_24 }")
     return roll_24
 
 def high_weighted_dice_roll():
@@ -108,9 +108,20 @@ def player_nav():
     if move == 'down':
         # error handling in here
         CURRENT_POSITION += 9
-    print(move)
-    print(CURRENT_POSITION)
+    print(f"You Moved: {move}")
+    print(f"Your Current Position is {CURRENT_POSITION}")
     return move
+
+def player_enters_location():
+    """
+    Checks when the player moves, if a monster appears or not
+    """
+    encounter = med_weighted_dice_roll()
+    if encounter > 16:
+        print(f"Your dice roll scored {encounter} and a monster appears!")
+    else:
+        print("You entered a new location")
+
 
 # Main Combat functions
 def monster_attack(dmg):
@@ -143,8 +154,9 @@ def main():
     menu_entry_index = terminal_menu.show()
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
-    while PLAYER_HAS_WIN_CONDITION == False:
+    while PLAYER_HAS_WIN_CONDITION is False:
         player_nav()
+        player_enters_location()
     # legendary_weighted_dice_roll()
     # print(options[menu_entry_index])
     # monster_attack(3)
