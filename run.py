@@ -8,9 +8,19 @@ from random import randint
 PLAYER_HP = 25
 PLAYER_DMG = 5
 
-# Gloabl Information about monsters (consider revising)
+PLAYER_HAS_WIN_CONDITION = False
+
+# Global Information about monsters (consider revising)
 MONSTER_HP = 1
 MONSTER_DMG = 1
+
+MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80]
+
+CURRENT_POSITION = MAP_GRID[5]
 
 """
 Player Setup
@@ -79,9 +89,27 @@ def player_nav():
     """
     Allows the users to choose where to move next
     """
+    global CURRENT_POSITION
     print("Which direction do you want to go?\n")
+    print(f"You are currently in : {CURRENT_POSITION}\n")
     move = input("Type 'up, down, left or right'\n")
+
+    # Need to check if the input is a string and matches one of the movement commands here
+
+    if move == 'left':
+        # error handling in here
+        CURRENT_POSITION -= 1
+    if move == 'right':
+        # error handling in here
+        CURRENT_POSITION += 1
+    if move == 'up':
+        # error handling in here
+        CURRENT_POSITION -= 9
+    if move == 'down':
+        # error handling in here
+        CURRENT_POSITION += 9
     print(move)
+    print(CURRENT_POSITION)
     return move
 
 # Main Combat functions
@@ -115,12 +143,13 @@ def main():
     menu_entry_index = terminal_menu.show()
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
+    while PLAYER_HAS_WIN_CONDITION == False:
+        player_nav()
+    # legendary_weighted_dice_roll()
     # print(options[menu_entry_index])
     # monster_attack(3)
     # player_attack(PLAYER_DMG)
-    player_nav()
-    # legendary_weighted_dice_roll()
-  
+
 
 if __name__ == "__main__":
     main()
