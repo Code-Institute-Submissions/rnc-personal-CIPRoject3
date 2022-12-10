@@ -11,6 +11,10 @@ PLAYER_DMG = 5
 MONSTER_HP = 1
 MONSTER_DMG = 1
 
+"""
+Player Setup
+"""
+
 def player_class_selection(player_class):
     """
     Sets the HP/DMG values for the player class
@@ -35,6 +39,16 @@ def player_class_selection(player_class):
 
     return player_class
 
+def player_nav():
+    """
+    Allows the users to choose where to move next
+    """
+    print("Which direction do you want to go?\n")
+    move = input("Type 'up, down, left or right'\n")
+    print(move)
+    return move
+
+# Main Combat functions
 def monster_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Need to make monster Damage variable
@@ -53,6 +67,9 @@ def player_attack(dmg):
     # Is there a terminal library for colored terminal text?
     return MONSTER_HP
 
+
+
+
 def main():
     """
     Main game Loop
@@ -64,7 +81,8 @@ def main():
     player_class_selection(options[menu_entry_index])
     # print(options[menu_entry_index])
     # monster_attack(3)
-    player_attack(PLAYER_DMG)
+    # player_attack(PLAYER_DMG)
+    player_nav()
   
 
 if __name__ == "__main__":
