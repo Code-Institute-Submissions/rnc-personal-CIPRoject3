@@ -43,12 +43,14 @@ def monster_attack(dmg):
     print(f"Your HP is: {PLAYER_HP}")
     return PLAYER_HP
 
-def player_attack(PLAYER_DMG):
+def player_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Needs some more thought about how the Monster HP/DMG is stored
     global MONSTER_HP
-    MONSTER_HP = MONSTER_HP - PLAYER_DMG
+    MONSTER_HP = MONSTER_HP - dmg
     print(f"The Monsters HP is: {MONSTER_HP}")
+    #If Statement about the Monsters Condition (is it dead?)
+    # Is there a terminal library for colored terminal text?
     return MONSTER_HP
 
 def main():
@@ -62,6 +64,7 @@ def main():
     player_class_selection(options[menu_entry_index])
     # print(options[menu_entry_index])
     # monster_attack(3)
+    player_attack(PLAYER_DMG)
   
 
 if __name__ == "__main__":
