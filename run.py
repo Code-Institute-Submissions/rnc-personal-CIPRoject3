@@ -8,11 +8,13 @@ from random import randint
 PLAYER_HP = 25
 PLAYER_DMG = 5
 
+# Current Player State
 PLAYER_HAS_WIN_CONDITION = False
+PLAYER_ENCOUNTER = False
 
 # Global Information about monsters (consider revising)
-MONSTER_HP = 1
-MONSTER_DMG = 1
+MONSTER_HP = 100
+MONSTER_DMG = 5
 
 MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -116,9 +118,13 @@ def player_enters_location():
     """
     Checks when the player moves, if a monster appears or not
     """
+    global PLAYER_ENCOUNTER
     encounter = med_weighted_dice_roll()
     if encounter > 16:
         print(f"Your dice roll scored {encounter} and a monster appears!")
+        PLAYER_ENCOUNTER = True
+        print(PLAYER_ENCOUNTER)
+        return PLAYER_ENCOUNTER
     else:
         print("You entered a new location")
 
@@ -128,16 +134,25 @@ def monster_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Need to make monster Damage variable
     global PLAYER_HP
+    print(f"Your HP is: {PLAYER_HP}\n")
+    print(f"The Monster attacks you for : {MONSTER_DMG}\n")
     PLAYER_HP = PLAYER_HP - dmg
-    print(f"Your HP is: {PLAYER_HP}")
+    if PLAYER_HP <= 0:
+        print(f"You were slain by the monster: {PLAYER_HP}\n")
+        print("Returning to Main Menu")
+        return main()
+
     return PLAYER_HP
 
 def player_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Needs some more thought about how the Monster HP/DMG is stored
     global MONSTER_HP
+    print(f"The Monsters HP is: {MONSTER_HP}\n")
+    print(f"You Attack the Monster for : {PLAYER_DMG}\n")
     MONSTER_HP = MONSTER_HP - dmg
-    print(f"The Monsters HP is: {MONSTER_HP}")
+    if MONSTER_HP <= 0:
+        print(f"The Monster is dead: {MONSTER_HP}\n")
     # If Statement about the Monsters Condition (is it dead?)
     # Is there a terminal library for colored terminal text?
     return MONSTER_HP
@@ -154,13 +169,13 @@ def main():
     menu_entry_index = terminal_menu.show()
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
-    while PLAYER_HAS_WIN_CONDITION is False:
+    while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False:
         player_nav()
         player_enters_location()
-    # legendary_weighted_dice_roll()
-    # print(options[menu_entry_index])
-    # monster_attack(3)
-    # player_attack(PLAYER_DMG)
+    if PLAYER_ENCOUNTER is True:
+        while MONSTER_HP > 0:
+            monster_attack(MONSTER_DMG)
+            player_attack(PLAYER_DMG)
 
 
 if __name__ == "__main__":
