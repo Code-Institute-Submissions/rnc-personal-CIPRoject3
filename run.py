@@ -7,6 +7,10 @@ from simple_term_menu import TerminalMenu
 PLAYER_HP = 25
 PLAYER_DMG = 5
 
+# Gloabl Information about monsters (consider revising)
+MONSTER_HP = 1
+MONSTER_DMG = 1
+
 def player_class_selection(player_class):
     """
     Sets the HP/DMG values for the player class
@@ -31,12 +35,21 @@ def player_class_selection(player_class):
 
     return player_class
 
-
 def monster_attack(dmg):
+    """Attack Loop for Monster Encounters"""
+    # Need to make monster Damage variable
     global PLAYER_HP
     PLAYER_HP = PLAYER_HP - dmg
     print(f"Your HP is: {PLAYER_HP}")
     return PLAYER_HP
+
+def player_attack(PLAYER_DMG):
+    """Attack Loop for Monster Encounters"""
+    # Needs some more thought about how the Monster HP/DMG is stored
+    global MONSTER_HP
+    MONSTER_HP = MONSTER_HP - PLAYER_DMG
+    print(f"The Monsters HP is: {MONSTER_HP}")
+    return MONSTER_HP
 
 def main():
     """
