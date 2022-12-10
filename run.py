@@ -4,6 +4,9 @@
 from simple_term_menu import TerminalMenu
 from random import randint
 
+# Issue where the Monster HP is constant so the 2nd time it rolls, its already dead and everything just stops after the dice roll (not sure this is the cause but the 2nd time that a monster appears the app stops completely)
+
+
 # Global Information about the player
 PLAYER_HP = 25
 PLAYER_DMG = 5
@@ -13,8 +16,8 @@ PLAYER_HAS_WIN_CONDITION = False
 PLAYER_ENCOUNTER = False
 
 # Global Information about monsters (consider revising)
-MONSTER_HP = 100
-MONSTER_DMG = 5
+MONSTER_HP = 8
+MONSTER_DMG = 1
 
 MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -137,6 +140,7 @@ def monster_attack(dmg):
     print(f"Your HP is: {PLAYER_HP}\n")
     print(f"The Monster attacks you for : {MONSTER_DMG}\n")
     PLAYER_HP = PLAYER_HP - dmg
+    print(f"Your HP is: {PLAYER_HP}\n")
     if PLAYER_HP <= 0:
         print(f"You were slain by the monster: {PLAYER_HP}\n")
         print("Returning to Main Menu")
@@ -148,11 +152,15 @@ def player_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Needs some more thought about how the Monster HP/DMG is stored
     global MONSTER_HP
+    global PLAYER_ENCOUNTER
     print(f"The Monsters HP is: {MONSTER_HP}\n")
     print(f"You Attack the Monster for : {PLAYER_DMG}\n")
     MONSTER_HP = MONSTER_HP - dmg
+    print(f"The Monsters HP is: {MONSTER_HP}\n")
     if MONSTER_HP <= 0:
         print(f"The Monster is dead: {MONSTER_HP}\n")
+        PLAYER_ENCOUNTER = False
+        player_nav()
     # If Statement about the Monsters Condition (is it dead?)
     # Is there a terminal library for colored terminal text?
     return MONSTER_HP
@@ -180,3 +188,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
