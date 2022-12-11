@@ -127,6 +127,7 @@ def player_enters_location():
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
         print(PLAYER_ENCOUNTER)
+        print(MONSTER_HP)
         return PLAYER_ENCOUNTER
     else:
         print("You entered a new location")
@@ -144,7 +145,7 @@ def monster_attack(dmg):
     if PLAYER_HP <= 0:
         print(f"You were slain by the monster: {PLAYER_HP}\n")
         print("Returning to Main Menu")
-        return main()
+        main()
 
     return PLAYER_HP
 
@@ -161,7 +162,7 @@ def player_attack(dmg):
         print(f"The Monster is dead: {MONSTER_HP}\n")
         PLAYER_ENCOUNTER = False
         player_nav()
-    # If Statement about the Monsters Condition (is it dead?)
+    # The Monsters HP needs tobe instanced or reset somehow
     # Is there a terminal library for colored terminal text?
     return MONSTER_HP
 
@@ -180,10 +181,10 @@ def main():
     while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False:
         player_nav()
         player_enters_location()
-    if PLAYER_ENCOUNTER is True:
-        while MONSTER_HP > 0:
-            monster_attack(MONSTER_DMG)
-            player_attack(PLAYER_DMG)
+        if PLAYER_ENCOUNTER is True:
+            while MONSTER_HP > 0:
+                monster_attack(MONSTER_DMG)
+                player_attack(PLAYER_DMG)
 
 
 if __name__ == "__main__":
