@@ -128,9 +128,6 @@ def player_enters_location():
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
         MONSTER_HP = randint(10, 50)
-        # monster_damage = randint(1, 10)
-
-
         print(PLAYER_ENCOUNTER)
         print(MONSTER_HP)
         return PLAYER_ENCOUNTER
