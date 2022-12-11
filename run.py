@@ -10,6 +10,7 @@ from random import randint
 # Global Information about the player
 PLAYER_HP = 20
 PLAYER_DMG = randint(1, 10)
+CURRENT_PLAYER_CLASS = None
 
 # Current Player State
 PLAYER_HAS_WIN_CONDITION = False
@@ -37,6 +38,7 @@ def player_class_selection(player_class):
     """
     global PLAYER_HP
     global PLAYER_DMG
+    global CURRENT_PLAYER_CLASS
 
     if player_class == 'Warrior':
         PLAYER_HP = 40
@@ -53,7 +55,8 @@ def player_class_selection(player_class):
         PLAYER_DMG = randint(3, 5)
         print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has the lowest base damage but can score critical hits dealing very high damage (1-20).")
 
-    return player_class
+    CURRENT_PLAYER_CLASS = player_class
+    return CURRENT_PLAYER_CLASS
 
 # Dice Rolls
 # Could this be one function with paramenters for the rarity?
@@ -62,7 +65,7 @@ def low_weighted_dice_roll():
     Dice roll with a weighting of 1/6
     """
     roll_6 = randint(1, 6)
-    print(f"You scored a {roll_6}")
+    # print(f"You scored a {roll_6}")
     return roll_6
 
 def med_weighted_dice_roll():
@@ -78,7 +81,7 @@ def high_weighted_dice_roll():
     Dice roll with a weighting of 1/50
     """
     roll_50 = randint(1, 50)
-    print(f"You scored a {roll_50}")
+    # print(f"You scored a {roll_50}")
     return roll_50
 
 def legendary_weighted_dice_roll():
@@ -86,7 +89,7 @@ def legendary_weighted_dice_roll():
     Dice roll with a weighting of 1/100
     """
     roll_100 = randint(1, 100)
-    print(f"You scored a {roll_100}")
+    # print(f"You scored a {roll_100}")
     return roll_100
 
 # Player Navigation
@@ -157,17 +160,28 @@ def player_attack(dmg):
     # Needs some more thought about how the Monster HP/DMG is stored
     global MONSTER_HP
     global PLAYER_ENCOUNTER
+    global CURRENT_PLAYER_CLASS
+
+    # Checks the class of the player and adds a 'skill' randomised number to their base damage
+    if CURRENT_PLAYER_CLASS == 'Warrior':
+        dmg = dmg + med_weighted_dice_roll()
+
+    elif CURRENT_PLAYER_CLASS == 'Mage':
+        dmg = dmg + low_weighted_dice_roll()
+
+    elif CURRENT_PLAYER_CLASS == 'Rogue':
+        dmg = dmg + high_weighted_dice_roll()
+
     print(f"The Monsters HP is: {MONSTER_HP}\n")
-    print(f"You Attack the Monster for : {PLAYER_DMG}\n")
+    print(f"You Attack the Monster for : {dmg}\n")
     MONSTER_HP = MONSTER_HP - dmg
     print(f"The Monsters HP is: {MONSTER_HP}\n")
     if MONSTER_HP <= 0:
         print(f"The Monster is dead: {MONSTER_HP}\n")
         PLAYER_ENCOUNTER = False
         player_nav()
-    # MONSTER_HP = 8
-    # The Monsters HP needs tobe instanced or reset somehow
-    # Is there a terminal library for colored terminal text?
+
+    # Is there a terminal library for colored terminal text for Monster death?
     return MONSTER_HP
 
 # ------------------MAIN GAME LOOP------------------
@@ -186,7 +200,7 @@ def main():
         if PLAYER_ENCOUNTER is True:
             while MONSTER_HP > 0:
                 monster_attack(MONSTER_DMG)
-                player_attack(PLAYER_DMG + )
+                player_attack(PLAYER_DMG)
 
 
 if __name__ == "__main__":
