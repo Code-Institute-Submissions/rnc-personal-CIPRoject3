@@ -4,10 +4,7 @@
 from simple_term_menu import TerminalMenu
 from random import randint
 
-# Issue where the Monster HP is constant so the 2nd time it rolls, its already dead and everything just stops after the dice roll (not sure this is the cause but the 2nd time that a monster appears the app stops completely)
-
-
-# Global Information about the player
+# Default Information about the player (Is modified by class selection)
 PLAYER_HP = 20
 PLAYER_DMG = randint(1, 10)
 CURRENT_PLAYER_CLASS = None
@@ -16,7 +13,7 @@ CURRENT_PLAYER_CLASS = None
 PLAYER_HAS_WIN_CONDITION = False
 PLAYER_ENCOUNTER = False
 
-# Global Information about monsters (consider revising)
+# Global Information about Monster
 MONSTER_HP = randint(5, 40)
 MONSTER_DMG = randint(1, 5)
 
