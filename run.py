@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from simple_term_menu import TerminalMenu
 from random import randint
+import emoji
 
 # Consider using https://pypi.org/project/colorama/ for colors in terminal
 
@@ -42,17 +43,20 @@ def player_class_selection(player_class):
     if player_class == 'Warrior':
         PLAYER_HP = 40
         PLAYER_DMG = randint(5, 7)
-        print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has a higher base damage and good max damage (6-15).")
+        print(emoji.emojize(f" HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
+        print(f"The {player_class} has a higher base damage and good max DMG (6-31).")
 
     elif player_class == 'Mage':
         PLAYER_HP = 15
         PLAYER_DMG = randint(2, 3)
-        print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has a lower base damage but is more consistent (4-6).")
+        print(emoji.emojize(f" HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
+        print(f"The {player_class} has a lower base damage but is more consistent (3-9).")
 
     elif player_class == 'Rogue':
         PLAYER_HP = 20
         PLAYER_DMG = randint(3, 5)
-        print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has the lowest base damage but can score critical hits dealing very high damage (1-20).")
+        print(emoji.emojize(f" HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
+        print(f"The {player_class} has the lowest base damage but can critical hit for very high damage (4-50).")
 
     CURRENT_PLAYER_CLASS = player_class
     return CURRENT_PLAYER_CLASS
@@ -126,7 +130,7 @@ def player_enters_location():
     global PLAYER_ENCOUNTER
     global MONSTER_HP
     encounter = med_weighted_dice_roll()
-    if encounter > 24:
+    if encounter > 20:
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
         MONSTER_HP = randint(10, 50)
@@ -143,12 +147,12 @@ def monster_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Need to make monster Damage variable
     global PLAYER_HP
-    print(f"Your HP is: {PLAYER_HP}\n")
-    print(f"The Monster attacks you for : {MONSTER_DMG}\n")
+    print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
+    print(emoji.emojize(f"The Monster attacks you for: :drop_of_blood:  {MONSTER_DMG}\n"))
     PLAYER_HP = PLAYER_HP - dmg
-    print(f"Your HP is: {PLAYER_HP}\n")
+    print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
     if PLAYER_HP <= 0:
-        print(f"You were slain by the monster: {PLAYER_HP}\n")
+        print(emoji.emojize(f"You were slain by the monster: :headstone:  HP: {PLAYER_HP}  :headstone:  \n"))
         print("Returning to Main Menu")
         main()
 
@@ -171,12 +175,12 @@ def player_attack(dmg):
     elif CURRENT_PLAYER_CLASS == 'Rogue':
         dmg = dmg + high_weighted_dice_roll()
 
-    print(f"The Monsters HP is: {MONSTER_HP}\n")
-    print(f"You Attack the Monster for : {dmg}\n")
+    print(emoji.emojize(f"The Monsters HP is: :blue_heart:  {MONSTER_HP}\n"))
+    print(emoji.emojize(f"You Attack the Monster for : :crossed_swords:  {dmg}\n"))
     MONSTER_HP = MONSTER_HP - dmg
-    print(f"The Monsters HP is: {MONSTER_HP}\n")
+    print(emoji.emojize(f"The Monsters HP is: :blue_heart:  {MONSTER_HP}\n"))
     if MONSTER_HP <= 0:
-        print(f"The Monster is dead: {MONSTER_HP}\n")
+        print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP: {MONSTER_HP}\n"))
         PLAYER_ENCOUNTER = False
         player_nav()
 
