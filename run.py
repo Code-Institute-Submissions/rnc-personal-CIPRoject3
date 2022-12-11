@@ -8,8 +8,8 @@ from random import randint
 
 
 # Global Information about the player
-PLAYER_HP = 25
-PLAYER_DMG = 5
+PLAYER_HP = 20
+PLAYER_DMG = randint(1, 10)
 
 # Current Player State
 PLAYER_HAS_WIN_CONDITION = False
@@ -40,18 +40,18 @@ def player_class_selection(player_class):
 
     if player_class == 'Warrior':
         PLAYER_HP = 40
-        PLAYER_DMG = 10
-        print(f"Your stats are HP: {PLAYER_HP} | DMG: {PLAYER_DMG}")
+        PLAYER_DMG = randint(5, 7)
+        print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has a higher base damage and good max damage (6-15).")
 
     elif player_class == 'Mage':
         PLAYER_HP = 15
-        PLAYER_DMG = 20
-        print(f"Your stats are HP: {PLAYER_HP} | DMG: {PLAYER_DMG}")
+        PLAYER_DMG = randint(2, 3)
+        print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has a lower base damage but is more consistent (4-6).")
 
     elif player_class == 'Rogue':
         PLAYER_HP = 20
-        PLAYER_DMG = 15
-        print(f"Your stats are HP: {PLAYER_HP} | DMG: {PLAYER_DMG}")
+        PLAYER_DMG = randint(3, 5)
+        print(f"Your stats are HP: {PLAYER_HP} | DMG: The {player_class} has the lowest base damage but can score critical hits dealing very high damage (1-20).")
 
     return player_class
 
@@ -62,7 +62,7 @@ def low_weighted_dice_roll():
     Dice roll with a weighting of 1/6
     """
     roll_6 = randint(1, 6)
-    print(f"You scored a {roll_6 }")
+    print(f"You scored a {roll_6}")
     return roll_6
 
 def med_weighted_dice_roll():
@@ -78,7 +78,7 @@ def high_weighted_dice_roll():
     Dice roll with a weighting of 1/50
     """
     roll_50 = randint(1, 50)
-    print(f"You scored a {roll_50 }")
+    print(f"You scored a {roll_50}")
     return roll_50
 
 def legendary_weighted_dice_roll():
@@ -86,7 +86,7 @@ def legendary_weighted_dice_roll():
     Dice roll with a weighting of 1/100
     """
     roll_100 = randint(1, 100)
-    print(f"You scored a {roll_100 }")
+    print(f"You scored a {roll_100}")
     return roll_100
 
 # Player Navigation
@@ -189,7 +189,7 @@ def main():
         if PLAYER_ENCOUNTER is True:
             while MONSTER_HP > 0:
                 monster_attack(MONSTER_DMG)
-                player_attack(PLAYER_DMG)
+                player_attack(PLAYER_DMG + )
 
 
 if __name__ == "__main__":
