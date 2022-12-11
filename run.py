@@ -4,6 +4,8 @@
 from simple_term_menu import TerminalMenu
 from random import randint
 
+# Consider using https://pypi.org/project/colorama/ for colors in terminal
+
 # Default Information about the player (Is modified by class selection)
 PLAYER_HP = 20
 PLAYER_DMG = randint(1, 10)
@@ -95,9 +97,9 @@ def player_nav():
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
-    print("Which direction do you want to go?\n")
     print(f"You are currently in : {CURRENT_POSITION}\n")
-    move = input("Type 'up, down, left or right'\n")
+    print("Do you want to move or search the area?\n")
+    move = input("Type 'up, down, left or right to move or 'search' to loot the area\n")
 
     # Need to check if the input is a string and matches one of the movement commands here
 
@@ -124,7 +126,7 @@ def player_enters_location():
     global PLAYER_ENCOUNTER
     global MONSTER_HP
     encounter = med_weighted_dice_roll()
-    if encounter > 1:
+    if encounter > 24:
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
         MONSTER_HP = randint(10, 50)
