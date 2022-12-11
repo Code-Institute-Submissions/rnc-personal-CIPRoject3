@@ -43,19 +43,19 @@ def player_class_selection(player_class):
     if player_class == 'Warrior':
         PLAYER_HP = 40
         PLAYER_DMG = randint(5, 7)
-        print(emoji.emojize(f" HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
+        print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a higher base damage and good max DMG (6-31).")
 
     elif player_class == 'Mage':
         PLAYER_HP = 15
         PLAYER_DMG = randint(2, 3)
-        print(emoji.emojize(f" HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
+        print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a lower base damage but is more consistent (3-9).")
 
     elif player_class == 'Rogue':
         PLAYER_HP = 20
         PLAYER_DMG = randint(3, 5)
-        print(emoji.emojize(f" HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
+        print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has the lowest base damage but can critical hit for very high damage (4-50).")
 
     CURRENT_PLAYER_CLASS = player_class
@@ -155,6 +155,7 @@ def monster_attack(dmg):
         print(emoji.emojize(f"You were slain by the monster: :headstone:  HP: {PLAYER_HP}  :headstone:  \n"))
         print("Returning to Main Menu")
         main()
+        # Bug here when the player dies, they will always fight a monster after restarting because of the conditions
 
     return PLAYER_HP
 
