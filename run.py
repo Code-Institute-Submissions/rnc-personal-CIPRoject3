@@ -16,8 +16,8 @@ PLAYER_HAS_WIN_CONDITION = False
 PLAYER_ENCOUNTER = False
 
 # Global Information about monsters (consider revising)
-MONSTER_HP = 8
-MONSTER_DMG = 1
+MONSTER_HP = randint(5, 40)
+MONSTER_DMG = randint(1, 5)
 
 MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -122,14 +122,20 @@ def player_enters_location():
     Checks when the player moves, if a monster appears or not
     """
     global PLAYER_ENCOUNTER
+    global MONSTER_HP
     encounter = med_weighted_dice_roll()
-    if encounter > 16:
+    if encounter > 1:
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
+        MONSTER_HP = randint(10, 50)
+        # monster_damage = randint(1, 10)
+
+
         print(PLAYER_ENCOUNTER)
         print(MONSTER_HP)
         return PLAYER_ENCOUNTER
     else:
+        print(f"Your dice roll scored {encounter}...safe...for now.")
         print("You entered a new location")
 
 
@@ -162,11 +168,10 @@ def player_attack(dmg):
         print(f"The Monster is dead: {MONSTER_HP}\n")
         PLAYER_ENCOUNTER = False
         player_nav()
+    # MONSTER_HP = 8
     # The Monsters HP needs tobe instanced or reset somehow
     # Is there a terminal library for colored terminal text?
     return MONSTER_HP
-
-
 
 # ------------------MAIN GAME LOOP------------------
 def main():
