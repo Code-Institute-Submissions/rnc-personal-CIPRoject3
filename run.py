@@ -147,15 +147,18 @@ def monster_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Need to make monster Damage variable
     global PLAYER_HP
+    global PLAYER_ENCOUNTER
+
     print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
     print(emoji.emojize(f"The Monster attacks you for: :drop_of_blood:  {MONSTER_DMG}\n"))
     PLAYER_HP = PLAYER_HP - dmg
     print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
     if PLAYER_HP <= 0:
-        print(emoji.emojize(f"You were slain by the monster: :headstone:  HP: {PLAYER_HP}  :headstone:  \n"))
+        print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:{PLAYER_HP} :headstone:  \n"))
         print("Returning to Main Menu")
+        PLAYER_ENCOUNTER = False
         main()
-        # Bug here when the player dies, they will always fight a monster after restarting because of the conditions
+        
 
     return PLAYER_HP
 
