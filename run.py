@@ -150,16 +150,15 @@ def player_enters_location():
         instanced_enemy = encounter_enemy_choice("ENEMY", randint(1, 6), randint(1, 6))
 
         # Calculates the HP of the instanced enemy
-        monster_encounter_hp = instanced_enemy.calculate_monster_hp()
+        MONSTER_HP = instanced_enemy.calculate_monster_hp()
 
         # Prints the name of the instanced enemy and its HP and DMG
-        print(f"It's a { instanced_enemy.name }!\nHP:{monster_encounter_hp} | DMG: {instanced_enemy.base_dmg}")
+        print(f"It's a { instanced_enemy.name }!\nHP:{MONSTER_HP} | DMG: {instanced_enemy.base_dmg}")
         
         # ? Spawn Boss on certain number ?
 
-        # MONSTER_HP = randint(10, 50) # Remove
-        print(PLAYER_ENCOUNTER)
-        print(MONSTER_HP)
+        print(f"Encounter: {PLAYER_ENCOUNTER}")
+        print(f"The Monster HP is: {MONSTER_HP}")
         return PLAYER_ENCOUNTER
     else:
         print(f"Your dice roll scored {encounter}...safe...for now.")
@@ -181,6 +180,7 @@ def monster_attack(dmg):
         print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:{PLAYER_HP} :headstone:  \n"))
         print("Returning to Main Menu")
         PLAYER_ENCOUNTER = False
+        print(f"Encounter: {PLAYER_ENCOUNTER}")
         main()
         
 
@@ -189,9 +189,9 @@ def monster_attack(dmg):
 def player_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Needs some more thought about how the Monster HP/DMG is stored
+    global CURRENT_PLAYER_CLASS
     global MONSTER_HP
     global PLAYER_ENCOUNTER
-    global CURRENT_PLAYER_CLASS
 
     # Checks the class of the player and adds a 'skill' randomised number to their base damage
     if CURRENT_PLAYER_CLASS == 'Warrior':
@@ -210,12 +210,15 @@ def player_attack(dmg):
     if MONSTER_HP <= 0:
         print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP: {MONSTER_HP}\n"))
         PLAYER_ENCOUNTER = False
+        print(f"Encounter: {PLAYER_ENCOUNTER}")
         player_nav()
 
     # Is there a terminal library for colored terminal text for Monster death?
     return MONSTER_HP
 
 # ------------------MAIN GAME LOOP------------------
+
+
 def main():
     """
     Main game Loop
