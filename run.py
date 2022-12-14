@@ -301,7 +301,7 @@ def player_enters_location():
         MONSTER_DMG = instanced_enemy.base_dmg
 
         # Prints the name of the instanced enemy and its HP and DMG
-        console.print(f"It's a [red]{ instanced_enemy.name }[/]!\nHP:[red]{MONSTER_HP}[/] | DMG: [purple]{MONSTER_DMG}[/]")
+        console.print(f"It's a [red]{ instanced_enemy.name }[/]!\nHP:[blue]{MONSTER_HP}[/] | DMG: [purple]{MONSTER_DMG}[/]")
         
         # print(f"Encounter: {PLAYER_ENCOUNTER}") <- This can be removed
         # print(f"The Monster HP is: {MONSTER_HP}") <- This can be removed
@@ -318,8 +318,8 @@ def monster_attack(dmg):
     global PLAYER_HP
     global PLAYER_ENCOUNTER
 
-    print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
-    console.print(emoji.emojize(f"The Monster attacks you for: :drop_of_blood: [purple]{MONSTER_DMG}[/]\n"))
+    console.print(emoji.emojize(f"Your HP is: :red_heart:  [red]{PLAYER_HP}[/]\n"))
+    console.print(emoji.emojize(f"The Monster attacks you for: :crossed_swords:  [purple]{MONSTER_DMG}[/]\n"))
     PLAYER_HP = PLAYER_HP - dmg
     print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
     if PLAYER_HP <= 0:
@@ -347,12 +347,12 @@ def player_attack(dmg):
     elif CURRENT_PLAYER_CLASS == 'Rogue':
         dmg = dmg + high_weighted_dice_roll()
 
-    print(emoji.emojize(f"The Monsters HP is: :blue_heart:  {MONSTER_HP}\n"))
+    console.print(emoji.emojize(f"The Monsters HP is: :blue_heart:  [blue]{MONSTER_HP}[/]\n"))
     console.print(emoji.emojize(f"You Attack the Monster for : :crossed_swords:  [bold]{dmg}[/]\n"))
     MONSTER_HP = MONSTER_HP - dmg
     console.print(emoji.emojize(f"The Monsters HP is: :blue_heart:  [blue]{MONSTER_HP}[/]\n"))
     if MONSTER_HP <= 0:
-        print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP:  [bold]{MONSTER_HP}[/]\n"))
+        console.print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP:  [bold]{MONSTER_HP}[/]\n"))
         PLAYER_ENCOUNTER = False
         print(f"Encounter: {PLAYER_ENCOUNTER}")
         # Reassigning move value so the player stays in same place after combat
