@@ -326,7 +326,7 @@ def monster_attack(dmg):
         console.print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:[bold]{PLAYER_HP}[/] :headstone:  \n"))
         print("Returning to Main Menu")
         PLAYER_ENCOUNTER = False
-        print(f"Encounter: {PLAYER_ENCOUNTER}")
+        # print(f"Encounter: {PLAYER_ENCOUNTER}")
         main()
     return PLAYER_HP
 
