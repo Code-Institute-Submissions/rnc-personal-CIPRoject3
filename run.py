@@ -222,23 +222,23 @@ def search_area():
     value_to_apply = instanced_loot.calculate_mod_value()
     if 'HP' in instanced_loot.name and PLAYER_HP < PLAYER_MAX_HP:
         PLAYER_HP = PLAYER_HP + value_to_apply
-        print(f"You find a HP Potion restoring: {value_to_apply}")
-        print(f"Your HP is now: {PLAYER_HP}")
+        console.print(f"You find a HP Potion restoring: [green]{value_to_apply}[/]")
+        console.print(f"Your HP is now: [red]{PLAYER_HP}[/]")
     # elif instanced_loot.name == 'Standard HP Potion':
     #     PLAYER_HP = PLAYER_HP + value_to_apply
     # elif instanced_loot.name == 'Full HP Restore':
     #     PLAYER_HP = PLAYER_HP + value_to_apply
     elif instanced_loot.name == 'Max Health Up':
         PLAYER_HP = PLAYER_MAX_HP
-        print(f"Your HP is now: {PLAYER_HP}")
+        console.print(f"It's a [yellow]{ instanced_loot.name }![/]\n")
+        console.print(f"Your HP is now: [red]{PLAYER_HP}[/]")
     elif instanced_loot.name == 'Weapon Upgrade':
         PLAYER_DMG = PLAYER_DMG + value_to_apply
-        print(f"Your Base DMG is now: {PLAYER_DMG}")
+        console.print(f"It's a [yellow]{ instanced_loot.name }![/]\n")
+        console.print(f"Your Base DMG is now: [blue]{PLAYER_DMG}[/]")
     elif instanced_loot.name == 'Umbra Sword':
         PLAYER_HAS_WIN_CONDITION = True
 
-    # Prints the name of the instanced loot (NEED TOADD DESCRIPTION and Make this conditional)
-    console.print(f"It's a [yellow]{ instanced_loot.name }![/]\n")
 
 # Player Navigation
 def player_nav(move):
