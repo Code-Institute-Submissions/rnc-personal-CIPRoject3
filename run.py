@@ -12,8 +12,10 @@ from items import MinorHealthPotion, StandardHealthPotion, FullHealthRestore, Ma
 
 # Default Information about the player (Is modified by class selection)
 PLAYER_HP = 20
+PLAYER_MAX_HP = 100
 PLAYER_DMG = randint(1, 10)
 CURRENT_PLAYER_CLASS = None
+PLAYER_INV = []
 
 # Current Player State
 PLAYER_HAS_WIN_CONDITION = False
@@ -34,8 +36,11 @@ MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 CURRENT_POSITION = MAP_GRID[40]
 
 # List of Enemy Types
-ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant ]
+ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant]
 
+# List of Loot
+LOOT_LIST = [MinorHealthPotion, StandardHealthPotion, FullHealthRestore, MaxHealthUp, WeaponUp]
+OBJECTIVE = UmbraSword
 
 """
 Player Setup
@@ -47,22 +52,26 @@ def player_class_selection(player_class):
     """
     global PLAYER_HP
     global PLAYER_DMG
+    global PLAYER_MAX_HP
     global CURRENT_PLAYER_CLASS
 
     if player_class == 'Warrior':
         PLAYER_HP = 40
+        PLAYER_MAX_HP = PLAYER_HP
         PLAYER_DMG = randint(5, 7)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a higher base damage and good max DMG (6-31).")
 
     elif player_class == 'Mage':
         PLAYER_HP = 15
+        PLAYER_MAX_HP = PLAYER_HP
         PLAYER_DMG = randint(2, 3)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a lower base damage but is more consistent (3-9).")
 
     elif player_class == 'Rogue':
         PLAYER_HP = 20
+        PLAYER_MAX_HP = PLAYER_HP
         PLAYER_DMG = randint(3, 5)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has the lowest base damage but can critical hit for very high damage (4-50).")
@@ -111,8 +120,45 @@ def search_area():
     There is also a chance that the player finds
     a monster by re-calling the encounter dice roll
     """
+    global PLAYER_HP
+    global PLAYER_MAX_HP
+    global PLAYER_DMG
+    global PLAYER_HAS_WIN_CONDITION
+    global OBJECTIVE
+    
     find_chance = legendary_weighted_dice_roll()
     print(f"You scout the area, and score a {find_chance}")
+
+    # Choose a random class enemy from the ENEMY_LIST
+    if find_chance < 100:
+        randomised_loot_choice = random.choice(LOOT_LIST)
+    else:
+        randomised_loot_choice = OBJECTIVE
+
+    # Creates an instance of the chosen class enemy and assigns it to instanced_enemy with some base DMG and HP
+    instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
+
+    # Conditions update Global Vars (Player HP/DMG/Win Condition)
+    value_to_apply = instanced_loot.calculate_mod_value()
+    if 'HP' in instanced_loot.name and PLAYER_HP < PLAYER_MAX_HP:
+        PLAYER_HP = PLAYER_HP + value_to_apply
+        print(f"You find a HP Potion restoring: {value_to_apply}")
+        print(f"Your HP is now: {PLAYER_HP}")
+    # elif instanced_loot.name == 'Standard HP Potion':
+    #     PLAYER_HP = PLAYER_HP + value_to_apply
+    # elif instanced_loot.name == 'Full HP Restore':
+    #     PLAYER_HP = PLAYER_HP + value_to_apply
+    elif instanced_loot.name == 'Max Health Up':
+        PLAYER_HP = PLAYER_MAX_HP
+        print(f"Your HP is now: {PLAYER_HP}")
+    elif instanced_loot.name == 'Weapon Upgrade':
+        PLAYER_DMG = PLAYER_DMG + value_to_apply
+        print(f"Your DMG is now: {PLAYER_DMG}")
+    elif instanced_loot.name == 'Umbra Sword':
+        PLAYER_HAS_WIN_CONDITION = True
+
+    # Prints the name of the instanced enemy and its HP (NEED TOADD DESCRIPTION)
+    print(f"It's a { instanced_loot.name }!\n")
 
 # Player Navigation
 def player_nav(move):

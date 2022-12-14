@@ -37,10 +37,10 @@ class FullHealthRestore(Loot):
 
 
 class MaxHealthUp(Loot):
-    """Creates an instance of Skeleton and sets the unique HP/DMG values"""
+    """Creates an instance of Max Health Up and sets the unique HP/DMG values"""
     def __init__(self, name, mod_value):
         super().__init__(name, mod_value)
-        self.name = "Skeleton"
+        self.name = "Max Health Up"
         self.mod_value = 10 + mod_value
 
 
@@ -48,8 +48,8 @@ class WeaponUp(Loot):
     """Creates an instance of Dragon and sets the unique HP/DMG values""" 
     def __init__(self, name, mod_value):
         super().__init__(name, mod_value)
-        self.name = "Dragon"
-        self.mod_value = 75 + mod_value
+        self.name = "Weapon Upgrade"
+        self.mod_value = 6 + mod_value
 
 
 class UmbraSword(Loot):
@@ -59,5 +59,5 @@ class UmbraSword(Loot):
     """ 
     def __init__(self, name, mod_value):
         super().__init__(name, mod_value)
-        self.name = "UmbraSword"
+        self.name = "Umbra Sword"
         self.mod_value = 25 + mod_value
