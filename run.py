@@ -5,7 +5,7 @@ from random import randint
 import random
 from simple_term_menu import TerminalMenu
 import emoji
-from monsters import Monster, Goblin, Rat
+from monsters import Monster, Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant
 
 # Consider using https://pypi.org/project/colorama/ for colors in terminal
 
@@ -33,8 +33,8 @@ MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 CURRENT_POSITION = MAP_GRID[40]
 
 # List of Enemy Types
-# ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant ]
-ENEMY_LIST = [Goblin, Rat]
+ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant ]
+
 
 """
 Player Setup
@@ -137,15 +137,27 @@ def player_enters_location():
     """
     global PLAYER_ENCOUNTER
     global MONSTER_HP
+    global ENEMY_LIST
+
     encounter = med_weighted_dice_roll()
     if encounter > 20:
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
+        # Choose a random class enemy from the ENEMY_LIST
+        encounter_enemy_choice = random.choice(ENEMY_LIST)
 
-# Instance a monster from list
-# ? Spawn Boss on certain number ?
+        # Creates an instance of the chosen class enemy and assigns it to instanced_enemy with some base DMG and HP
+        instanced_enemy = encounter_enemy_choice("ENEMY", randint(1, 6), randint(1, 6))
 
-        MONSTER_HP = randint(10, 50) # Remove
+        # Calculates the HP of the instanced enemy
+        monster_encounter_hp = instanced_enemy.calculate_monster_hp()
+
+        # Prints the name of the instanced enemy and its HP and DMG
+        print(f"It's a { instanced_enemy.name }!\nHP:{monster_encounter_hp} | DMG: {instanced_enemy.base_dmg}")
+        
+        # ? Spawn Boss on certain number ?
+
+        # MONSTER_HP = randint(10, 50) # Remove
         print(PLAYER_ENCOUNTER)
         print(MONSTER_HP)
         return PLAYER_ENCOUNTER

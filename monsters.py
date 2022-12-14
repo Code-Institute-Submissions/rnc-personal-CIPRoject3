@@ -39,6 +39,16 @@ class Zombie(Monster):
         self.monster_hp = 15 + monster_hp
         self.base_dmg = 1 + base_dmg
 
+
+class Skeleton(Monster):
+    """Creates an instance of Skeleton and sets the unique HP/DMG values"""
+    def __init__(self, name, monster_hp, base_dmg):
+        super().__init__(name, monster_hp, base_dmg)
+        self.name = "Skeleton"
+        self.monster_hp = 10 + monster_hp
+        self.base_dmg = 3 + base_dmg
+
+
 class Dragon(Monster):
     """Creates an instance of Dragon and sets the unique HP/DMG values""" 
     def __init__(self, name, monster_hp, base_dmg):
@@ -91,5 +101,3 @@ class Giant(Monster):
         self.name = "Giant"
         self.monster_hp = 100 + monster_hp
         self.base_dmg = 35 + base_dmg
-
-        
