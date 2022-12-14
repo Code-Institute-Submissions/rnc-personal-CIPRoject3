@@ -233,12 +233,12 @@ def search_area():
         print(f"Your HP is now: {PLAYER_HP}")
     elif instanced_loot.name == 'Weapon Upgrade':
         PLAYER_DMG = PLAYER_DMG + value_to_apply
-        print(f"Your DMG is now: {PLAYER_DMG}")
+        print(f"Your Base DMG is now: {PLAYER_DMG}")
     elif instanced_loot.name == 'Umbra Sword':
         PLAYER_HAS_WIN_CONDITION = True
 
     # Prints the name of the instanced loot (NEED TOADD DESCRIPTION and Make this conditional)
-    print(f"It's a { instanced_loot.name }!\n")
+    console.print(f"It's a [yellow]{ instanced_loot.name }![/]\n")
 
 # Player Navigation
 def player_nav(move):
