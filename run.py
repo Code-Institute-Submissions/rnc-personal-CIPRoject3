@@ -133,12 +133,18 @@ def player_nav(move):
         print(f"You Moved: {move}")
     if move == 'Up':
         # error handling in here
-        CURRENT_POSITION -= 9
-        print(f"You Moved: {move}")
+        if CURRENT_POSITION >= 9:
+            CURRENT_POSITION -= 9
+            print(f"You Moved: {move}")
+        else:
+            print("You cannot go that way.")
     if move == 'Down':
         # error handling in here
-        CURRENT_POSITION += 9
-        print(f"You Moved: {move}")
+        if CURRENT_POSITION <= 72:
+            CURRENT_POSITION += 9
+            print(f"You Moved: {move}")
+        else:
+            print("You cannot go that way.")
     if move == 'Search':
         # Search function here
         search_area()
