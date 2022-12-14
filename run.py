@@ -105,7 +105,8 @@ def legendary_weighted_dice_roll():
 
 def search_area():
     """
-    When the player searches, roll a 1/100 dice roll and return a random item based on the score
+    When the player searches, roll a 1/100 dice roll and return a random item based on the score.
+    There is also a chance that the player finds a monster by re-calling the encounter dice roll
     """
     find_chance = legendary_weighted_dice_roll()
     print(f"You scout the area, and score a {find_chance}")
@@ -118,7 +119,7 @@ def player_nav():
     global CURRENT_POSITION
     print(f"You are currently in : {CURRENT_POSITION}\n")
     print("Do you want to move or search the area?\n")
-    move = input("Type 'up, down, left or right to move or 'search' to loot the area\n")
+    move = input("Type 'up, down, left or right to move or 'search' to scout the area\n")
 
     # Need to check if the input is a string and matches one of the movement commands here
 
