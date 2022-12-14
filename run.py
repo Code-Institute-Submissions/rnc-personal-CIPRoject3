@@ -112,34 +112,34 @@ def search_area():
     print(f"You scout the area, and score a {find_chance}")
 
 # Player Navigation
-def player_nav():
+def player_nav(move):
     """
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
     print(f"You are currently in : {CURRENT_POSITION}\n")
     print("Do you want to move or search the area?\n")
-    move = input("Type 'up, down, left or right to move or 'search' to scout the area\n")
+    # move = input("Type 'up, down, left or right to move or 'search' to scout the area\n")
 
     # Need to check if the input is a string and matches one of the movement commands here
 
-    if move == 'left':
+    if move == 'Left':
         # error handling in here
         CURRENT_POSITION -= 1
         print(f"You Moved: {move}")
-    if move == 'right':
+    if move == 'Right':
         # error handling in here
         CURRENT_POSITION += 1
         print(f"You Moved: {move}")
-    if move == 'up':
+    if move == 'Up':
         # error handling in here
         CURRENT_POSITION -= 9
         print(f"You Moved: {move}")
-    if move == 'down':
+    if move == 'Down':
         # error handling in here
         CURRENT_POSITION += 9
         print(f"You Moved: {move}")
-    if move == 'search':
+    if move == 'Search':
         # Search function here
         search_area()
     else:
@@ -243,7 +243,11 @@ def main():
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
     while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False:
-        player_nav()
+        move_list = ["Left", "Right", "Up", "Down", "Search"]
+        command_menu = TerminalMenu(move_list)
+        display_move_list = command_menu.show()
+        print(f"You have selected {move_list[display_move_list]}!")
+        player_nav(move_list[display_move_list])
         player_enters_location()
         if PLAYER_ENCOUNTER is True:
             while MONSTER_HP > 0:
