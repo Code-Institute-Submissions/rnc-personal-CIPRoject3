@@ -27,13 +27,91 @@ MONSTER_HP = randint(5, 40)
 MONSTER_DMG = randint(1, 5)
 
 # TODO - Each Cell Should have a name, think about how do do this: K/V Dictionary?
-MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
-69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81]
+MAP_GRID = {
+    1: "The Crystal Caves",
+    2: "The Cursed Forest",
+    3: "The Dark Tower",
+    4: "The Dragon's Den",
+    5: "The Enchanted Garden",
+    6: "The Ghost Ship",
+    7: "The Goblin King's Castle",
+    8: "The Haunted Mansion",
+    9: "The Invisible City",
+    10: "The Island of the Dead",
+    11: "The Land of Ice and Snow",
+    12: "The Land of the Fire Giants",
+    13: "The Lightning Fields",
+    14: "The Lost City",
+    15: "The Misty Mountains",
+    16: "The Necromancer's Tomb",
+    17: "The Ocean of Storms",
+    18: "The Palace of the Faerie Queen",
+    19: "The Pool of the Forgotten Dead",
+    20: "The Ruins of the Ancient City",
+    21: "The Secret Laboratory",
+    22: "The Sewers of the City",
+    23: "The Temple of the Sun God",
+    24: "The Temple of the Moon Goddess",
+    25: "The Time Warp",
+    26: "The Valley of the Dead",
+    27: "The Volcano of Fire",
+    28: "The Wasteland",
+    29: "The Waterfall of Eternal Youth",
+    30: "The Well of Souls",
+    31: "The Witch's Cauldron",
+    32: "The Wizard's Tower",
+    33: "The Xyzzy Dimension",
+    34: "The Yellow Desert",
+    35: "The Ziggurat of the Moon",
+    36: "The Ziggurat of the Sun",
+    37: "The Zodiac Temple",
+    38: "The Zombie's Lair",
+    39: "The Abyss",
+    40: "The Blackhole",
+    41: "The Crystal Palace",
+    42: "The Cursed Castle",
+    43: "The Dark Forest",
+    44: "The Dragon's Lair",
+    45: "The Enchanted Castle",
+    46: "The Ghost Town",
+    47: "The Goblin King's Kingdom",
+    48: "The Haunted Woods",
+    49: "The Invisible Castle",
+    50: "The Island of the Undead",
+    51: "The Land of Ice and Fire",
+    52: "The Land of the Ice Giants",
+    53: "The Lightning Forest",
+    54: "The Lost Kingdom",
+    55: "The Misty Swamp",
+    56: "The Necromancer's Crypt",
+    57: "The Ocean of Storms",
+    58: "The Palace of the Elf Queen",
+    59: "The Pool of the Cursed Dead",
+    60: "The Ruins of the Lost City",
+    61: "The Secret Mine",
+    62: "The Sewers of the Castle",
+    63: "The Temple of the Earth Goddess",
+    64: "The Temple of the Air God",
+    65: "The Time Loop",
+    66: "The Valley of the Lost Souls",
+    67: "The Volcano of Ice",
+    68: "The Wasteland of the Undead",
+    69: "The Waterfall of Eternal Life",
+    70: "The Well of Wishes",
+    71: "The Witch's Dungeon",
+    72: "The Wizard's Castle",
+    73: "The Xyzzy Dimension of Illusions",
+    74: "The Yellow Savannah",
+    75: "The Ziggurat of the Dragon",
+    76: "The Ziggurat of the Phoenix",
+    77: "The Zodiac Temple of Time",
+    78: "The Zombie's Haunt",
+    79: "The Abyss of the Lost",
+    80: "The Blackhole of Despair",
+    81: "Umbral Stone"
+}
 
-CURRENT_POSITION = MAP_GRID[40]
+CURRENT_POSITION = 40
 
 # List of Enemy Types
 ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant]
@@ -166,7 +244,7 @@ def player_nav(move):
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
-    print(f"You are currently in : {CURRENT_POSITION}\n")
+    print(f"You are currently in : {MAP_GRID[CURRENT_POSITION]}\n")
     print("Do you want to move or search the area?\n")
     # move = input("Type 'up, down, left or right to move or 'search' to scout the area\n")
 
@@ -199,7 +277,7 @@ def player_nav(move):
         search_area()
     else:
         print("Please type 'up, down, left or right to move or 'search'")
-    print(f"Your Current Position is {CURRENT_POSITION}")
+    print(f"You are now in: {MAP_GRID[CURRENT_POSITION]}")
     return move
 
 def player_enters_location():
