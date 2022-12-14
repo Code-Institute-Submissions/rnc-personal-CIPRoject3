@@ -251,23 +251,23 @@ def player_nav(move):
     if move == 'Left':
         # error handling in here
         CURRENT_POSITION -= 1
-        print(f"You Moved: {move}")
+        console.print(f"You Moved: [blue]{move}[/]")
     if move == 'Right':
         # error handling in here
         CURRENT_POSITION += 1
-        print(f"You Moved: {move}")
+        console.print(f"You Moved: [blue]{move}[/]")
     if move == 'Up':
         # error handling in here
         if CURRENT_POSITION >= 9:
             CURRENT_POSITION -= 9
-            print(f"You Moved: {move}")
+            console.print(f"You Moved: [blue]{move}[/]")
         else:
             print("You cannot go that way.")
     if move == 'Down':
         # error handling in here
         if CURRENT_POSITION <= 72:
             CURRENT_POSITION += 9
-            print(f"You Moved: {move}")
+            console.print(f"You Moved: [blue]{move}[/]")
         else:
             print("You cannot go that way.")
     if move == 'Search':
@@ -301,10 +301,10 @@ def player_enters_location():
         MONSTER_DMG = instanced_enemy.base_dmg
 
         # Prints the name of the instanced enemy and its HP and DMG
-        print(f"It's a { instanced_enemy.name }!\nHP:{MONSTER_HP} | DMG: {MONSTER_DMG}")
+        console.print(f"It's a [red]{ instanced_enemy.name }[/]!\nHP:[red]{MONSTER_HP}[/] | DMG: [purple]{MONSTER_DMG}[/]")
         
         # print(f"Encounter: {PLAYER_ENCOUNTER}") <- This can be removed
-        print(f"The Monster HP is: {MONSTER_HP}")
+        # print(f"The Monster HP is: {MONSTER_HP}") <- This can be removed
         return PLAYER_ENCOUNTER
     else:
         print(f"Your dice roll scored {encounter}...safe...for now.")
@@ -319,11 +319,11 @@ def monster_attack(dmg):
     global PLAYER_ENCOUNTER
 
     print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
-    print(emoji.emojize(f"The Monster attacks you for: :drop_of_blood:  {MONSTER_DMG}\n"))
+    console.print(emoji.emojize(f"The Monster attacks you for: :drop_of_blood: [purple]{MONSTER_DMG}[/]\n"))
     PLAYER_HP = PLAYER_HP - dmg
     print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
     if PLAYER_HP <= 0:
-        print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:{PLAYER_HP} :headstone:  \n"))
+        console.print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:[bold]{PLAYER_HP}[/] :headstone:  \n"))
         print("Returning to Main Menu")
         PLAYER_ENCOUNTER = False
         print(f"Encounter: {PLAYER_ENCOUNTER}")
@@ -348,18 +348,17 @@ def player_attack(dmg):
         dmg = dmg + high_weighted_dice_roll()
 
     print(emoji.emojize(f"The Monsters HP is: :blue_heart:  {MONSTER_HP}\n"))
-    print(emoji.emojize(f"You Attack the Monster for : :crossed_swords:  {dmg}\n"))
+    console.print(emoji.emojize(f"You Attack the Monster for : :crossed_swords:  [bold]{dmg}[/]\n"))
     MONSTER_HP = MONSTER_HP - dmg
-    print(emoji.emojize(f"The Monsters HP is: :blue_heart:  {MONSTER_HP}\n"))
+    console.print(emoji.emojize(f"The Monsters HP is: :blue_heart:  [blue]{MONSTER_HP}[/]\n"))
     if MONSTER_HP <= 0:
-        print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP: {MONSTER_HP}\n"))
+        print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP:  [bold]{MONSTER_HP}[/]\n"))
         PLAYER_ENCOUNTER = False
         print(f"Encounter: {PLAYER_ENCOUNTER}")
         # Reassigning move value so the player stays in same place after combat
         move = None
         player_nav(move)
 
-    # Is there a terminal library for colored terminal text for Monster death?
     return MONSTER_HP
 
 # ------------------MAIN GAME LOOP------------------
