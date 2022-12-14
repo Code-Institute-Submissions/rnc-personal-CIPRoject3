@@ -354,7 +354,7 @@ def player_attack(dmg):
     if MONSTER_HP <= 0:
         console.print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP:  [bold]{MONSTER_HP}[/]\n"))
         PLAYER_ENCOUNTER = False
-        print(f"Encounter: {PLAYER_ENCOUNTER}")
+        # print(f"Encounter: {PLAYER_ENCOUNTER}")
         # Reassigning move value so the player stays in same place after combat
         move = None
         player_nav(move)
