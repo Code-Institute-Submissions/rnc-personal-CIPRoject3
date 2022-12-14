@@ -157,7 +157,7 @@ def search_area():
     elif instanced_loot.name == 'Umbra Sword':
         PLAYER_HAS_WIN_CONDITION = True
 
-    # Prints the name of the instanced enemy and its HP (NEED TOADD DESCRIPTION)
+    # Prints the name of the instanced loot (NEED TOADD DESCRIPTION and Make this conditional)
     print(f"It's a { instanced_loot.name }!\n")
 
 # Player Navigation
