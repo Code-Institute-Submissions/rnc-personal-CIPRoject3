@@ -153,6 +153,7 @@ def player_enters_location():
     """
     global PLAYER_ENCOUNTER
     global MONSTER_HP
+    global MONSTER_DMG
     global ENEMY_LIST
 
     encounter = med_weighted_dice_roll()
@@ -167,9 +168,10 @@ def player_enters_location():
 
         # Calculates the HP of the instanced enemy
         MONSTER_HP = instanced_enemy.calculate_monster_hp()
+        MONSTER_DMG = instanced_enemy.base_dmg
 
         # Prints the name of the instanced enemy and its HP and DMG
-        print(f"It's a { instanced_enemy.name }!\nHP:{MONSTER_HP} | DMG: {instanced_enemy.base_dmg}")
+        print(f"It's a { instanced_enemy.name }!\nHP:{MONSTER_HP} | DMG: {MONSTER_DMG}")
         
         # ? Spawn Boss on certain number ?
 
