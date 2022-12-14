@@ -136,21 +136,21 @@ def player_class_selection(player_class):
     global CURRENT_PLAYER_CLASS
 
     if player_class == 'Warrior':
-        PLAYER_HP = 40
+        PLAYER_HP = 150
         PLAYER_MAX_HP = PLAYER_HP
         PLAYER_DMG = randint(5, 7)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a higher base damage and good max DMG (6-31).")
 
     elif player_class == 'Mage':
-        PLAYER_HP = 15
+        PLAYER_HP = 85
         PLAYER_MAX_HP = PLAYER_HP
         PLAYER_DMG = randint(2, 3)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a lower base damage but is more consistent (3-9).")
 
     elif player_class == 'Rogue':
-        PLAYER_HP = 20
+        PLAYER_HP = 120
         PLAYER_MAX_HP = PLAYER_HP
         PLAYER_DMG = randint(3, 5)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
@@ -222,14 +222,14 @@ def search_area():
     value_to_apply = instanced_loot.calculate_mod_value()
     if 'HP' in instanced_loot.name and PLAYER_HP < PLAYER_MAX_HP:
         PLAYER_HP = PLAYER_HP + value_to_apply
-        console.print(f"You find a HP Potion restoring: [green]{value_to_apply}[/]")
-        console.print(f"Your HP is now: [red]{PLAYER_HP}[/]")
+        console.print(f"You find a [yellow]HP Potion[/] restoring: [green]{value_to_apply}[/]")
+        console.print(f"Your HP is now: [red]{PLAYER_HP}[/]\n")
     # elif instanced_loot.name == 'Standard HP Potion':
     #     PLAYER_HP = PLAYER_HP + value_to_apply
     # elif instanced_loot.name == 'Full HP Restore':
     #     PLAYER_HP = PLAYER_HP + value_to_apply
     elif instanced_loot.name == 'Max Health Up':
-        PLAYER_HP = PLAYER_MAX_HP * 1.25
+        PLAYER_MAX_HP = PLAYER_MAX_HP * 1.25
         console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
         console.print(f"Your HP is now: [red]{PLAYER_HP}[/] (+25%)\n")
     elif instanced_loot.name == 'Weapon Upgrade':
