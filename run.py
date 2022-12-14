@@ -1,9 +1,11 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
-from simple_term_menu import TerminalMenu
 from random import randint
+import random
+from simple_term_menu import TerminalMenu
 import emoji
+from monsters import Monster, Goblin, Rat
 
 # Consider using https://pypi.org/project/colorama/ for colors in terminal
 
@@ -29,6 +31,10 @@ MAP_GRID = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81]
 
 CURRENT_POSITION = MAP_GRID[40]
+
+# List of Enemy Types
+# ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant ]
+ENEMY_LIST = [Goblin, Rat]
 
 """
 Player Setup
@@ -135,7 +141,11 @@ def player_enters_location():
     if encounter > 20:
         print(f"Your dice roll scored {encounter} and a monster appears!")
         PLAYER_ENCOUNTER = True
-        MONSTER_HP = randint(10, 50)
+
+# Instance a monster from list
+# ? Spawn Boss on certain number ?
+
+        MONSTER_HP = randint(10, 50) # Remove
         print(PLAYER_ENCOUNTER)
         print(MONSTER_HP)
         return PLAYER_ENCOUNTER
