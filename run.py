@@ -269,7 +269,7 @@ def player_nav(move):
             CURRENT_POSITION += 9
             console.print(f"You Moved: [blue]{move}[/]")
         else:
-            print("You cannot go that way.")
+            console.print(emoji.emojize(":prohibited: [bold]You cannot go that way.[/] :prohibited:\n"))
     if move == 'Search':
         # Search function here
         search_area()
