@@ -231,7 +231,7 @@ def search_area():
     elif instanced_loot.name == 'Max Health Up':
         PLAYER_MAX_HP = PLAYER_MAX_HP * 1.25
         console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
-        console.print(f"Your HP is now: [red]{PLAYER_HP}[/] (+25%)\n")
+        console.print(f"Your Max HP is now: [red]{PLAYER_MAX_HP}[/] (+25%)\n")
     elif instanced_loot.name == 'Weapon Upgrade':
         PLAYER_DMG = PLAYER_DMG + value_to_apply
         console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
