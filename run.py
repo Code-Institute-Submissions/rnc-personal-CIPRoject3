@@ -103,6 +103,13 @@ def legendary_weighted_dice_roll():
     # print(f"You scored a {roll_100}")
     return roll_100
 
+def search_area():
+    """
+    When the player searches, roll a 1/100 dice roll and return a random item based on the score
+    """
+    find_chance = legendary_weighted_dice_roll()
+    print(f"You scout the area, and score a {find_chance}")
+
 # Player Navigation
 def player_nav():
     """
@@ -118,16 +125,24 @@ def player_nav():
     if move == 'left':
         # error handling in here
         CURRENT_POSITION -= 1
+        print(f"You Moved: {move}")
     if move == 'right':
         # error handling in here
         CURRENT_POSITION += 1
+        print(f"You Moved: {move}")
     if move == 'up':
         # error handling in here
         CURRENT_POSITION -= 9
+        print(f"You Moved: {move}")
     if move == 'down':
         # error handling in here
         CURRENT_POSITION += 9
-    print(f"You Moved: {move}")
+        print(f"You Moved: {move}")
+    if move == 'search':
+        # Search function here
+        search_area()
+    else:
+        print("Please type 'up, down, left or right to move or 'search'")
     print(f"Your Current Position is {CURRENT_POSITION}")
     return move
 
@@ -182,8 +197,6 @@ def monster_attack(dmg):
         PLAYER_ENCOUNTER = False
         print(f"Encounter: {PLAYER_ENCOUNTER}")
         main()
-        
-
     return PLAYER_HP
 
 def player_attack(dmg):
