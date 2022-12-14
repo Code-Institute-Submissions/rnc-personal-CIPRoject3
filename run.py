@@ -246,7 +246,7 @@ def player_nav(move):
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
-    console.print(f"[white]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
+    console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
     
     if move == 'Left':
         # error handling in here
