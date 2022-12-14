@@ -301,7 +301,7 @@ def player_enters_location():
         MONSTER_DMG = instanced_enemy.base_dmg
 
         # Prints the name of the instanced enemy and its HP and DMG
-        console.print(f"It's a [red]{ instanced_enemy.name }[/]!\nHP:[blue]{MONSTER_HP}[/] | DMG: [purple]{MONSTER_DMG}[/]")
+        console.print(f"It's a [red]{ instanced_enemy.name }[/]!\nHP: [blue]{MONSTER_HP}[/] | DMG: [purple]{MONSTER_DMG}[/]")
         
         # print(f"Encounter: {PLAYER_ENCOUNTER}") <- This can be removed
         # print(f"The Monster HP is: {MONSTER_HP}") <- This can be removed
