@@ -207,7 +207,7 @@ def search_area():
     global OBJECTIVE
     
     find_chance = legendary_weighted_dice_roll()
-    print(f"You scout the area, and score a {find_chance}")
+    print(f"You scout the area, and score {find_chance}")
 
     # Choose a random class enemy from the ENEMY_LIST
     if find_chance < 100:
@@ -229,13 +229,13 @@ def search_area():
     # elif instanced_loot.name == 'Full HP Restore':
     #     PLAYER_HP = PLAYER_HP + value_to_apply
     elif instanced_loot.name == 'Max Health Up':
-        PLAYER_HP = PLAYER_MAX_HP
-        console.print(f"It's a [yellow]{ instanced_loot.name }![/]\n")
-        console.print(f"Your HP is now: [red]{PLAYER_HP}[/]")
+        PLAYER_HP = PLAYER_MAX_HP * 1.25
+        console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
+        console.print(f"Your HP is now: [red]{PLAYER_HP}[/] (+25%)\n")
     elif instanced_loot.name == 'Weapon Upgrade':
         PLAYER_DMG = PLAYER_DMG + value_to_apply
-        console.print(f"It's a [yellow]{ instanced_loot.name }![/]\n")
-        console.print(f"Your Base DMG is now: [blue]{PLAYER_DMG}[/]")
+        console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
+        console.print(f"Your Base DMG is now: [blue]{PLAYER_DMG}[/]\n")
     elif instanced_loot.name == 'Umbra Sword':
         PLAYER_HAS_WIN_CONDITION = True
 
@@ -316,12 +316,13 @@ def monster_attack(dmg):
     """Attack Loop for Monster Encounters"""
     # Need to make monster Damage variable
     global PLAYER_HP
+    global PLAYER_DMG
     global PLAYER_ENCOUNTER
 
-    console.print(emoji.emojize(f"Your HP is: :red_heart:  [red]{PLAYER_HP}[/]\n"))
+    console.print(emoji.emojize(f"Your Stats are: :red_heart:  [red]{PLAYER_HP}[/] | :crossed_swords:  [blue]{PLAYER_DMG}[/]\n"))
     console.print(emoji.emojize(f"The Monster attacks you for: :crossed_swords:  [purple]{MONSTER_DMG}[/]\n"))
     PLAYER_HP = PLAYER_HP - dmg
-    print(emoji.emojize(f"Your HP is: :red_heart:  {PLAYER_HP}\n"))
+    console.print(emoji.emojize(f"Your HP is: :red_heart:  [red]{PLAYER_HP}[/]\n"))
     if PLAYER_HP <= 0:
         console.print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:[bold]{PLAYER_HP}[/] :headstone:  \n"))
         print("Returning to Main Menu")
