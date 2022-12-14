@@ -225,7 +225,9 @@ def player_attack(dmg):
         print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP: {MONSTER_HP}\n"))
         PLAYER_ENCOUNTER = False
         print(f"Encounter: {PLAYER_ENCOUNTER}")
-        player_nav()
+        # Reassigning move value so the player stays in same place after combat
+        move = None
+        player_nav(move)
 
     # Is there a terminal library for colored terminal text for Monster death?
     return MONSTER_HP
