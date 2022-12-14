@@ -5,7 +5,8 @@ from random import randint
 import random
 from simple_term_menu import TerminalMenu
 import emoji
-from monsters import Monster, Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant
+from monsters import Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant
+from items import MinorHealthPotion, StandardHealthPotion, FullHealthRestore, MaxHealthUp, WeaponUp, UmbraSword
 
 # Consider using https://pypi.org/project/colorama/ for colors in terminal
 
@@ -105,8 +106,10 @@ def legendary_weighted_dice_roll():
 
 def search_area():
     """
-    When the player searches, roll a 1/100 dice roll and return a random item based on the score.
-    There is also a chance that the player finds a monster by re-calling the encounter dice roll
+    When the player searches, roll a 1/100 dice roll
+    and return a random item based on the score.
+    There is also a chance that the player finds
+    a monster by re-calling the encounter dice roll
     """
     find_chance = legendary_weighted_dice_roll()
     print(f"You scout the area, and score a {find_chance}")
