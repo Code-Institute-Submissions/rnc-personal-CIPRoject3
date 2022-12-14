@@ -5,10 +5,12 @@ from random import randint
 import random
 from simple_term_menu import TerminalMenu
 import emoji
+from rich.console import Console
 from monsters import Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant
 from items import MinorHealthPotion, StandardHealthPotion, FullHealthRestore, MaxHealthUp, WeaponUp, UmbraSword
 
-# Consider using https://pypi.org/project/colorama/ for colors in terminal
+# Setup for Rich Library for Styling the terminal
+console = Console()
 
 # Default Information about the player (Is modified by class selection)
 PLAYER_HP = 20
@@ -244,12 +246,8 @@ def player_nav(move):
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
-    print(f"You are currently in : {MAP_GRID[CURRENT_POSITION]}\n")
-    print("Do you want to move or search the area?\n")
-    # move = input("Type 'up, down, left or right to move or 'search' to scout the area\n")
-
-    # Need to check if the input is a string and matches one of the movement commands here
-
+    console.print(f"[white]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
+    
     if move == 'Left':
         # error handling in here
         CURRENT_POSITION -= 1
@@ -275,9 +273,8 @@ def player_nav(move):
     if move == 'Search':
         # Search function here
         search_area()
-    else:
-        print("Please type 'up, down, left or right to move or 'search'")
-    print(f"You are now in: {MAP_GRID[CURRENT_POSITION]}")
+
+    # print(f"You are now in: {MAP_GRID[CURRENT_POSITION]}")
     return move
 
 def player_enters_location():
@@ -306,14 +303,12 @@ def player_enters_location():
         # Prints the name of the instanced enemy and its HP and DMG
         print(f"It's a { instanced_enemy.name }!\nHP:{MONSTER_HP} | DMG: {MONSTER_DMG}")
         
-        # ? Spawn Boss on certain number ?
-
-        print(f"Encounter: {PLAYER_ENCOUNTER}")
+        # print(f"Encounter: {PLAYER_ENCOUNTER}") <- This can be removed
         print(f"The Monster HP is: {MONSTER_HP}")
         return PLAYER_ENCOUNTER
     else:
         print(f"Your dice roll scored {encounter}...safe...for now.")
-        print("You entered a new location")
+        print("Do you want to move or search the area?\n")
 
 
 # Main Combat functions
