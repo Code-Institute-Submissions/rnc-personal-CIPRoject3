@@ -210,51 +210,53 @@ def search_area():
     print(f"You scout the area, and score {find_chance}")
     # Initialising RNG for Item - Dice roll score decides which item is found
     randomised_loot_choice = None
-
-    # Chooses an item based on the deice roll / 100. Gaps in ranges left intentionally for balance
+    instanced_loot = None
+    # Chooses an item based on the dice roll / 100. Gaps in ranges left intentionally for balance
     # This is to prevent repeated searching and grinding up player statistics by repeated searches
     
     if find_chance in range(1, 35):
         randomised_loot_choice = LOOT_LIST[1]
+        instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(51, 60):
         randomised_loot_choice = LOOT_LIST[2]
+        instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(70, 78):
         randomised_loot_choice = LOOT_LIST[3]
+        instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(81, 85):
         randomised_loot_choice = LOOT_LIST[4]
+        instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(95, 99):
         randomised_loot_choice = LOOT_LIST[5]
+        instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance == 100:
         randomised_loot_choice = OBJECTIVE
         print(f"You found the {OBJECTIVE}")
         # This is part of the Win Condition
-    else:
+    elif randomised_loot_choice is None:
         print("You find nothing but a few rats and some dust...")
 
-
-    # Creates an instance of the chosen class enemy and assigns it to instanced_loot with some base DMG and HP
-    instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
-
     # Conditions update Global Vars (Player HP/DMG/Win Condition)
-    value_to_apply = instanced_loot.calculate_mod_value()
-    if 'HP' in instanced_loot.name and PLAYER_HP < PLAYER_MAX_HP:
-        PLAYER_HP = PLAYER_HP + value_to_apply
-        console.print(f"You find a [yellow]HP Potion[/] restoring: [green]{value_to_apply}[/]")
-        console.print(f"Your HP is now: [red]{PLAYER_HP}[/]\n")
-    # elif instanced_loot.name == 'Standard HP Potion':
-    #     PLAYER_HP = PLAYER_HP + value_to_apply
-    # elif instanced_loot.name == 'Full HP Restore':
-    #     PLAYER_HP = PLAYER_HP + value_to_apply
-    elif instanced_loot.name == 'Max Health Up':
-        PLAYER_MAX_HP = PLAYER_MAX_HP * 1.25
-        console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
-        console.print(f"Your Max HP is now: [red]{PLAYER_MAX_HP}[/] (+25%)\n")
-    elif instanced_loot.name == 'Weapon Upgrade':
-        PLAYER_DMG = PLAYER_DMG + value_to_apply
-        console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
-        console.print(f"Your Base DMG is now: [blue]{PLAYER_DMG}[/]\n")
-    elif instanced_loot.name == 'Umbra Sword':
-        PLAYER_HAS_WIN_CONDITION = True
+    if randomised_loot_choice is not None:
+        value_to_apply = instanced_loot.calculate_mod_value()
+        if 'HP' in instanced_loot.name and PLAYER_HP < PLAYER_MAX_HP:
+            PLAYER_HP = PLAYER_HP + value_to_apply
+            console.print(f"You find a [yellow]HP Potion[/] restoring: [green]{value_to_apply}[/]")
+            console.print(f"Your HP is now: [red]{PLAYER_HP}[/]\n")
+        # elif instanced_loot.name == 'Standard HP Potion':
+        #     PLAYER_HP = PLAYER_HP + value_to_apply
+        # elif instanced_loot.name == 'Full HP Restore':
+        #     PLAYER_HP = PLAYER_HP + value_to_apply
+        elif instanced_loot.name == 'Max Health Up':
+            PLAYER_MAX_HP = PLAYER_MAX_HP * 1.25
+            console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
+            console.print(f"Your Max HP is now: [red]{PLAYER_MAX_HP}[/] (+25%)\n")
+        elif instanced_loot.name == 'Weapon Upgrade':
+            PLAYER_DMG = PLAYER_DMG + value_to_apply
+            console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
+            console.print(f"Your Base DMG is now: [blue]{PLAYER_DMG}[/]\n")
+        elif instanced_loot.name == 'Umbra Sword':
+            PLAYER_HAS_WIN_CONDITION = True
 
 
 # Player Navigation
@@ -268,35 +270,27 @@ def player_nav(move):
     if move == 'Left':
         # error handling in here
         CURRENT_POSITION -= 1
-        console.print(f"You Moved: [blue]{move}[/]")
-        
+        console.print(f"You Moved: [blue]{move}[/]")        
     if move == 'Right':
         # error handling in here
         CURRENT_POSITION += 1
-        console.print(f"You Moved: [blue]{move}[/]")
-        
+        console.print(f"You Moved: [blue]{move}[/]")        
     if move == 'Up':
         # error handling in here
         if CURRENT_POSITION >= 9:
             CURRENT_POSITION -= 9
-            console.print(f"You Moved: [blue]{move}[/]")
-            
+            console.print(f"You Moved: [blue]{move}[/]")            
         else:
             print("You cannot go that way.")
     if move == 'Down':
         # error handling in here
         if CURRENT_POSITION <= 72:
             CURRENT_POSITION += 9
-            console.print(f"You Moved: [blue]{move}[/]")
-            
+            console.print(f"You Moved: [blue]{move}[/]")            
         else:
             console.print(emoji.emojize(":prohibited: [bold]You cannot go that way.[/] :prohibited:\n"))
     if move == 'Search':
         search_area()
-    
-
-
-    # print(f"You are now in: {MAP_GRID[CURRENT_POSITION]}")
     return move
 
 def player_enters_location():
@@ -400,14 +394,16 @@ def main():
         move_list = ["Left", "Right", "Up", "Down", "Search"]
         command_menu = TerminalMenu(move_list)
         display_move_list = command_menu.show()
-        print(f"You have selected {move_list[display_move_list]}!")
+        print(f"You have selected {move_list[display_move_list]}.")
         player_nav(move_list[display_move_list])
         player_enters_location()
         if PLAYER_ENCOUNTER is True:
             while MONSTER_HP > 0:
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
-
+    if PLAYER_HAS_WIN_CONDITION is True:
+        print(f"You Found the {OBJECTIVE}\n")
+        print("Congratulations!")
 
 if __name__ == "__main__":
     main()
