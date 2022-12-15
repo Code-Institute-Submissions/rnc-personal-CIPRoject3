@@ -215,7 +215,7 @@ def search_area():
     else:
         randomised_loot_choice = OBJECTIVE
 
-    # Creates an instance of the chosen class enemy and assigns it to instanced_enemy with some base DMG and HP
+    # Creates an instance of the chosen class enemy and assigns it to instanced_loot with some base DMG and HP
     instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
 
     # Conditions update Global Vars (Player HP/DMG/Win Condition)
@@ -246,26 +246,24 @@ def player_nav(move):
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
-    has_been_searched = None
     console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
-    # print(f"Has the area been searched? {has_been_searched}")
     
     if move == 'Left':
         # error handling in here
         CURRENT_POSITION -= 1
         console.print(f"You Moved: [blue]{move}[/]")
-        has_been_searched = False
+        
     if move == 'Right':
         # error handling in here
         CURRENT_POSITION += 1
         console.print(f"You Moved: [blue]{move}[/]")
-        has_been_searched = False
+        
     if move == 'Up':
         # error handling in here
         if CURRENT_POSITION >= 9:
             CURRENT_POSITION -= 9
             console.print(f"You Moved: [blue]{move}[/]")
-            has_been_searched = False
+            
         else:
             print("You cannot go that way.")
     if move == 'Down':
@@ -273,15 +271,13 @@ def player_nav(move):
         if CURRENT_POSITION <= 72:
             CURRENT_POSITION += 9
             console.print(f"You Moved: [blue]{move}[/]")
-            has_been_searched = False
+            
         else:
             console.print(emoji.emojize(":prohibited: [bold]You cannot go that way.[/] :prohibited:\n"))
-    if move == 'Search' and has_been_searched is False:
+    if move == 'Search':
         search_area()
-    has_been_searched = True
-    if move == 'Search' and has_been_searched is True:
-        print(f"Has the area been searched? {has_been_searched}")
-        print("This area has already been searched.")
+    
+
 
     # print(f"You are now in: {MAP_GRID[CURRENT_POSITION]}")
     return move
