@@ -1,1 +1,2 @@
-# Your requirements go here
+emoji==2.2.0
+simple-term-menu==1.5.2
