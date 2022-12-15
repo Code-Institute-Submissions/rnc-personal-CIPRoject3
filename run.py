@@ -229,7 +229,7 @@ def search_area():
             print(f"You found the {OBJECTIVE}")
             # This is part of the Win Condition
         else:
-            print(f"You find nothing but a few rats and some dust...")
+            print("You find nothing but a few rats and some dust...")
 
 
     # Creates an instance of the chosen class enemy and assigns it to instanced_loot with some base DMG and HP
