@@ -10,7 +10,6 @@ from monsters import Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc,
 from items import MinorHealthPotion, StandardHealthPotion, FullHealthRestore, MaxHealthUp, WeaponUp, UmbraSword
 
 # Setup for Rich Library for Styling the terminal
-# Rich hasnt been included in the req.txt file so might cause an issue?
 console = Console()
 
 # Default Information about the player (Is modified by class selection)
@@ -18,7 +17,6 @@ PLAYER_HP = 20
 PLAYER_MAX_HP = 100
 PLAYER_DMG = randint(1, 10)
 CURRENT_PLAYER_CLASS = None
-PLAYER_INV = []
 
 # Current Player State
 PLAYER_HAS_WIN_CONDITION = False
@@ -30,7 +28,6 @@ PLAYER_ENCOUNTER = False
 MONSTER_HP = randint(5, 40)
 MONSTER_DMG = randint(1, 5)
 
-# TODO - Each Cell Should have a name, think about how do do this: K/V Dictionary?
 MAP_GRID = {
     1: "The Crystal Caves",
     2: "The Cursed Forest",
