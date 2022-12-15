@@ -324,8 +324,6 @@ def player_enters_location():
         # Prints the name of the instanced enemy and its HP and DMG
         console.print(f"It's a [red]{ instanced_enemy.name }[/]!\nHP: [blue]{MONSTER_HP}[/] | DMG: [purple]{MONSTER_DMG}[/]")
         
-        # print(f"Encounter: {PLAYER_ENCOUNTER}") <- This can be removed
-        # print(f"The Monster HP is: {MONSTER_HP}") <- This can be removed
         return PLAYER_ENCOUNTER
     else:
         print(f"Your dice roll scored {encounter}...safe...for now.")
@@ -335,7 +333,6 @@ def player_enters_location():
 # Main Combat functions
 def monster_attack(dmg):
     """Attack Loop for Monster Encounters"""
-    # Need to make monster Damage variable
     global PLAYER_HP
     global PLAYER_DMG
     global PLAYER_ENCOUNTER
@@ -348,14 +345,12 @@ def monster_attack(dmg):
         console.print(emoji.emojize(f"You were slain by the monster: :headstone:  HP:[bold]{PLAYER_HP}[/] :headstone:  \n"))
         print("Returning to Main Menu")
         PLAYER_ENCOUNTER = False
-        # print(f"Encounter: {PLAYER_ENCOUNTER}")
         main()
     return PLAYER_HP
 
 
 def player_attack(dmg):
     """Attack Loop for Monster Encounters"""
-    # Needs some more thought about how the Monster HP/DMG is stored
     global CURRENT_PLAYER_CLASS
     global MONSTER_HP
     global PLAYER_ENCOUNTER
@@ -377,7 +372,6 @@ def player_attack(dmg):
     if MONSTER_HP <= 0:
         console.print(emoji.emojize(f"The Monster is dead: :face_with_crossed-out_eyes: Enemy HP:  [bold]{MONSTER_HP}[/]\n"))
         PLAYER_ENCOUNTER = False
-        # print(f"Encounter: {PLAYER_ENCOUNTER}")
         # Reassigning move value so the player stays in same place after combat
         move = None
         player_nav(move)
@@ -408,8 +402,8 @@ def main():
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
     if PLAYER_HAS_WIN_CONDITION is True:
-        # print(f"You Found the {OBJECTIVE.name}\n")
         print("Congratulations!")
+
 
 if __name__ == "__main__":
     main()
