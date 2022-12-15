@@ -10,6 +10,7 @@ from monsters import Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc,
 from items import MinorHealthPotion, StandardHealthPotion, FullHealthRestore, MaxHealthUp, WeaponUp, UmbraSword
 
 # Setup for Rich Library for Styling the terminal
+# Rich hasnt been included in the req.txt file so might cause an issue?
 console = Console()
 
 # Default Information about the player (Is modified by class selection)
