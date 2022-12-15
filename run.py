@@ -205,6 +205,7 @@ def search_area():
     global PLAYER_DMG
     global PLAYER_HAS_WIN_CONDITION
     global OBJECTIVE
+    global PLAYER_ENCOUNTER
     
     find_chance = legendary_weighted_dice_roll()
     print(f"You scout the area, and score {find_chance}")
@@ -258,6 +259,7 @@ def search_area():
             console.print(f"Your Base DMG is now: [blue]{PLAYER_DMG}[/]\n")
         elif instanced_loot.name == 'Umbra Sword':
             PLAYER_HAS_WIN_CONDITION = True
+            PLAYER_ENCOUNTER = False
 
 
 # Player Navigation
@@ -403,7 +405,7 @@ def main():
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
     if PLAYER_HAS_WIN_CONDITION is True:
-        print(f"You Found the {OBJECTIVE}\n")
+        # print(f"You Found the {OBJECTIVE.name}\n")
         print("Congratulations!")
 
 if __name__ == "__main__":
