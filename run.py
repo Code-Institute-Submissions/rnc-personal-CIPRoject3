@@ -24,7 +24,8 @@ PLAYER_HAS_WIN_CONDITION = False
 PLAYER_ENCOUNTER = False
 
 # Global Information about Monster
-# TODO Make the Monsters name randomised from a dictionary/list
+# Random values are used as placeholders and to initialise the varaible
+# Real values are generated per encounter from the monster subclass
 MONSTER_HP = randint(5, 40)
 MONSTER_DMG = randint(1, 5)
 
