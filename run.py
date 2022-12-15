@@ -245,10 +245,6 @@ def search_area():
             PLAYER_HP = PLAYER_HP + value_to_apply
             console.print(f"You find a [yellow]HP Potion[/] restoring: [green]{value_to_apply}[/]")
             console.print(f"Your HP is now: [red]{PLAYER_HP}[/]\n")
-        # elif instanced_loot.name == 'Standard HP Potion':
-        #     PLAYER_HP = PLAYER_HP + value_to_apply
-        # elif instanced_loot.name == 'Full HP Restore':
-        #     PLAYER_HP = PLAYER_HP + value_to_apply
         elif instanced_loot.name == 'Max Health Up':
             PLAYER_MAX_HP = PLAYER_MAX_HP * 1.25
             console.print(f"You Find a [yellow]{ instanced_loot.name }![/]")
