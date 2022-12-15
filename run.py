@@ -215,23 +215,24 @@ def search_area():
     # This is to prevent repeated searching and grinding up player statistics by repeated searches
     
     if find_chance in range(1, 35):
-        randomised_loot_choice = LOOT_LIST[1]
+        randomised_loot_choice = LOOT_LIST[0]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(51, 60):
-        randomised_loot_choice = LOOT_LIST[2]
+        randomised_loot_choice = LOOT_LIST[1]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(70, 78):
-        randomised_loot_choice = LOOT_LIST[3]
+        randomised_loot_choice = LOOT_LIST[2]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(81, 85):
-        randomised_loot_choice = LOOT_LIST[4]
+        randomised_loot_choice = LOOT_LIST[3]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance in range(95, 99):
-        randomised_loot_choice = LOOT_LIST[5]
+        randomised_loot_choice = LOOT_LIST[4]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
     if find_chance == 100:
         randomised_loot_choice = OBJECTIVE
-        print(f"You found the {OBJECTIVE}")
+        instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
+        console.print(f"[yellow]You found the {instanced_loot.name}![/]")
         # This is part of the Win Condition
     elif randomised_loot_choice is None:
         print("You find nothing but a few rats and some dust...")
