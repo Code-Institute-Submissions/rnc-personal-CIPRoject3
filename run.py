@@ -160,6 +160,8 @@ def player_class_selection(player_class):
 
 # Dice Rolls
 # Could this be one function with paramenters for the rarity?
+
+
 def low_weighted_dice_roll():
     """
     Dice roll with a weighting of 1/6
@@ -167,6 +169,7 @@ def low_weighted_dice_roll():
     roll_6 = randint(1, 6)
     # print(f"You scored a {roll_6}")
     return roll_6
+
 
 def med_weighted_dice_roll():
     """
@@ -176,6 +179,7 @@ def med_weighted_dice_roll():
     # print(f"You scored a {roll_24 }")
     return roll_24
 
+
 def high_weighted_dice_roll():
     """
     Dice roll with a weighting of 1/50
@@ -184,6 +188,7 @@ def high_weighted_dice_roll():
     # print(f"You scored a {roll_50}")
     return roll_50
 
+
 def legendary_weighted_dice_roll():
     """
     Dice roll with a weighting of 1/100
@@ -191,6 +196,7 @@ def legendary_weighted_dice_roll():
     roll_100 = randint(1, 100)
     # print(f"You scored a {roll_100}")
     return roll_100
+
 
 def search_area():
     """
@@ -264,7 +270,7 @@ def player_nav(move):
     """
     global CURRENT_POSITION
     console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
-    
+   
     if move == 'Left':
         # error handling in here
         CURRENT_POSITION -= 1
@@ -290,6 +296,7 @@ def player_nav(move):
     if move == 'Search':
         search_area()
     return move
+
 
 def player_enters_location():
     """
@@ -344,6 +351,7 @@ def monster_attack(dmg):
         # print(f"Encounter: {PLAYER_ENCOUNTER}")
         main()
     return PLAYER_HP
+
 
 def player_attack(dmg):
     """Attack Loop for Monster Encounters"""
