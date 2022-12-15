@@ -213,23 +213,23 @@ def search_area():
 
     # Chooses an item based on the deice roll / 100. Gaps in ranges left intentionally for balance
     # This is to prevent repeated searching and grinding up player statistics by repeated searches
-    if find_chance < 100:
-        if find_chance in range(1, 35):
-            randomised_loot_choice = LOOT_LIST[1]
-        if find_chance in range(51, 60):
-            randomised_loot_choice = LOOT_LIST[2]
-        if find_chance in range(70, 78):
-            randomised_loot_choice = LOOT_LIST[3]
-        if find_chance in range(81, 85):
-            randomised_loot_choice = LOOT_LIST[4]
-        if find_chance in range(95, 99):
-            randomised_loot_choice = LOOT_LIST[5]
-        if find_chance == 100:
-            randomised_loot_choice = OBJECTIVE
-            print(f"You found the {OBJECTIVE}")
-            # This is part of the Win Condition
-        else:
-            print("You find nothing but a few rats and some dust...")
+    
+    if find_chance in range(1, 35):
+        randomised_loot_choice = LOOT_LIST[1]
+    if find_chance in range(51, 60):
+        randomised_loot_choice = LOOT_LIST[2]
+    if find_chance in range(70, 78):
+        randomised_loot_choice = LOOT_LIST[3]
+    if find_chance in range(81, 85):
+        randomised_loot_choice = LOOT_LIST[4]
+    if find_chance in range(95, 99):
+        randomised_loot_choice = LOOT_LIST[5]
+    if find_chance == 100:
+        randomised_loot_choice = OBJECTIVE
+        print(f"You found the {OBJECTIVE}")
+        # This is part of the Win Condition
+    else:
+        print("You find nothing but a few rats and some dust...")
 
 
     # Creates an instance of the chosen class enemy and assigns it to instanced_loot with some base DMG and HP
