@@ -21,7 +21,7 @@ CURRENT_PLAYER_CLASS = None
 # Current Player State
 PLAYER_HAS_WIN_CONDITION = False
 PLAYER_ENCOUNTER = False
-
+VICTORY = False
 
 # Global Information about Monster
 # Random values are used as placeholders and to initialise the varaible
@@ -238,7 +238,7 @@ def search_area():
     if find_chance in range(95, 99):
         randomised_loot_choice = LOOT_LIST[4]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
-    if find_chance == 100:
+    if find_chance < 100:
         randomised_loot_choice = OBJECTIVE
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
         console.print(f"[yellow]You found the {instanced_loot.name}![/]")
@@ -272,18 +272,29 @@ def player_nav(move):
     Allows the users to choose where to move next
     """
     global CURRENT_POSITION
+    global VICTORY
     console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
     console.print(f"[bold]The Win location is :[/] [blue]{MAP_GRID[WIN_LOCATION]}\n[/]")
     print(CURRENT_POSITION is WIN_LOCATION)
+    if CURRENT_POSITION is WIN_LOCATION:
+        VICTORY = True
    
     if move == 'Left':
         # error handling in here
-        CURRENT_POSITION -= 1
-        console.print(f"You Moved: [blue]{move}[/]")        
+        if CURRENT_POSITION != 1:
+            CURRENT_POSITION -= 1
+            console.print(f"You Moved: [blue]{move}[/]")
+            print(f"New postion: {CURRENT_POSITION}")
+        else:
+            print("You cannot go that way.")
+            CURRENT_POSITION += 1
     if move == 'Right':
         # error handling in here
-        CURRENT_POSITION += 1
-        console.print(f"You Moved: [blue]{move}[/]")        
+        if CURRENT_POSITION != 81:
+            CURRENT_POSITION += 1
+            console.print(f"You Moved: [blue]{move}[/]")
+        else:
+            print("You cannot go that way.")         
     if move == 'Up':
         # error handling in here
         if CURRENT_POSITION >= 9:
@@ -395,7 +406,7 @@ def main():
     menu_entry_index = terminal_menu.show()
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
-    while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False and CURRENT_POSITION is not WIN_LOCATION:
+    while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False:
         move_list = ["Left", "Right", "Up", "Down", "Search"]
         command_menu = TerminalMenu(move_list)
         display_move_list = command_menu.show()
@@ -406,9 +417,9 @@ def main():
             while MONSTER_HP > 0:
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
-    while PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False and CURRENT_POSITION is not WIN_LOCATION:
+    while PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False:
         print(f"Congratulations! You found the Umbra Sword!")
-        print(f"Take it to {WIN_LOCATION} as soon as possible!")
+        print(f"Take it to {MAP_GRID[WIN_LOCATION]} as soon as possible!")
         move_list_ending = ["Left", "Right", "Up", "Down"]
         command_menu_ending = TerminalMenu(move_list_ending)
         display_move_list_ending = command_menu_ending.show()
@@ -419,9 +430,9 @@ def main():
             while MONSTER_HP > 0:
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
-    if PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False and CURRENT_POSITION is WIN_LOCATION:
-        print(f"Congratulations! You have returned the sword to it's rightful place! Thanks for playing.")
-
+        if VICTORY is True:
+            print("Congratulations! You have returned the sword to it's rightful place! Thanks for playing.")
+            return VICTORY
 
 if __name__ == "__main__":
     main()
