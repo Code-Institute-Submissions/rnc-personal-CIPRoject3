@@ -144,7 +144,7 @@ def player_class_selection(player_class):
     elif player_class == 'Mage':
         PLAYER_HP = 85
         PLAYER_MAX_HP = PLAYER_HP
-        PLAYER_DMG = randint(2, 3)
+        PLAYER_DMG = randint(2, 13)
         print(emoji.emojize(f"HP: :red_heart:  {PLAYER_HP} | DMG: :crossed_swords:  {PLAYER_DMG}"))
         print(f"The {player_class} has a lower base damage but is more consistent (3-9).")
 
