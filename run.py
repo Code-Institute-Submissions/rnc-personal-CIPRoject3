@@ -115,7 +115,8 @@ MAP_GRID = {
 
 # Player related position Information
 CURRENT_POSITION = 40
-WIN_LOCATION = 81
+WIN_LOCATION = randint(1, 81)
+SWORD_LOCATION = randint(1, 81)
 
 # List of Enemy Types
 ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant]
@@ -266,6 +267,23 @@ def search_area():
             PLAYER_ENCOUNTER = False
 
 
+def use_map():
+    """ Works out the distance between the players current location and the place the sword needs to be """
+    global WIN_LOCATION
+    global CURRENT_POSITION
+
+    distance_from_ending_location = abs(CURRENT_POSITION - WIN_LOCATION)
+    compass = ""
+    if distance_from_ending_location < 40:
+        compass = "To the West, or the North...who knows?"
+    elif distance_from_ending_location >= 41:
+        compass = "Likely to the East or South, that is for you to discover!"
+    elif distance_from_ending_location == 0:
+        compass = "It looks like you are standing in it? You did find the Umbra Sword didn't you?"
+    console.print(f"You are currently {abs(distance_from_ending_location)} tiles away from [blue]{MAP_GRID[WIN_LOCATION]}[/]")
+    print(emoji.emojize(f":globe_with_meridians: {compass}"))
+    return compass
+
 # Player Navigation
 def player_nav(move):
     """
@@ -275,7 +293,8 @@ def player_nav(move):
     global VICTORY
     console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
     console.print(f"[bold]The Win location is :[/] [blue]{MAP_GRID[WIN_LOCATION]}\n[/]")
-    print(CURRENT_POSITION is WIN_LOCATION)
+    # This is commented out but left here for 'cheating' to allow for easier assessment :)
+    # print(CURRENT_POSITION is WIN_LOCATION)
     if CURRENT_POSITION is WIN_LOCATION:
         VICTORY = True
    
@@ -311,6 +330,8 @@ def player_nav(move):
             console.print(emoji.emojize(":prohibited: [bold]You cannot go that way.[/] :prohibited:\n"))
     if move == 'Search':
         search_area()
+    if move == 'Look at Map':
+        use_map()
     return move
 
 
@@ -407,7 +428,7 @@ def main():
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
     while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False:
-        move_list = ["Left", "Right", "Up", "Down", "Search"]
+        move_list = ["Left", "Right", "Up", "Down", "Search", 'Look at Map']
         command_menu = TerminalMenu(move_list)
         display_move_list = command_menu.show()
         print(f"You have selected {move_list[display_move_list]}.")
@@ -420,7 +441,7 @@ def main():
     while PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False:
         print(f"Congratulations! You found the Umbra Sword!")
         print(f"Take it to {MAP_GRID[WIN_LOCATION]} as soon as possible!")
-        move_list_ending = ["Left", "Right", "Up", "Down"]
+        move_list_ending = ["Left", "Right", "Up", "Down", 'Look at Map']
         command_menu_ending = TerminalMenu(move_list_ending)
         display_move_list_ending = command_menu_ending.show()
         print(f"You have selected {move_list_ending[display_move_list_ending]}.")
