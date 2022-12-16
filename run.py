@@ -307,7 +307,7 @@ def player_nav(move):
     global CURRENT_POSITION
     global VICTORY
     console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
-    console.print(f"[bold]The Win location is :[/] [blue]{MAP_GRID[WIN_LOCATION]}\n[/]")
+    console.print(f"[bold]You must take the Sword to :[/] [blue]{MAP_GRID[WIN_LOCATION]}\n[/]")
     # This is commented out but left here for 'cheating' to allow for easier assessment :)
     # print(CURRENT_POSITION is WIN_LOCATION)
     if CURRENT_POSITION is WIN_LOCATION:
