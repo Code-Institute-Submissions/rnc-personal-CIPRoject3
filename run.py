@@ -215,6 +215,8 @@ def search_area():
     global PLAYER_HAS_WIN_CONDITION
     global OBJECTIVE
     global PLAYER_ENCOUNTER
+    global SWORD_LOCATION
+    global CURRENT_POSITION
     
     find_chance = legendary_weighted_dice_roll()
     print(f"You scout the area, and score {find_chance}")
@@ -239,7 +241,7 @@ def search_area():
     if find_chance in range(95, 99):
         randomised_loot_choice = LOOT_LIST[4]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
-    if find_chance < 100:
+    if find_chance < 100 and CURRENT_POSITION is SWORD_LOCATION:
         randomised_loot_choice = OBJECTIVE
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
         console.print(f"[yellow]You found the {instanced_loot.name}![/]")
@@ -271,18 +273,31 @@ def use_map():
     """ Works out the distance between the players current location and the place the sword needs to be """
     global WIN_LOCATION
     global CURRENT_POSITION
+    global SWORD_LOCATION
+    global OBJECTIVE
 
     distance_from_ending_location = abs(CURRENT_POSITION - WIN_LOCATION)
-    compass = ""
+    location_compass = ""
     if distance_from_ending_location < 40:
-        compass = "To the West, or the North...who knows?"
+        location_compass = "To the West, or the North...who knows?"
     elif distance_from_ending_location >= 41:
-        compass = "Likely to the East or South, that is for you to discover!"
+        location_compass = "Likely to the East or South, that is for you to discover!"
     elif distance_from_ending_location == 0:
-        compass = "It looks like you are standing in it? You did find the Umbra Sword didn't you?"
+        location_compass = "It looks like you are standing in it? You did find the Umbra Sword didn't you?"
     console.print(f"You are currently {abs(distance_from_ending_location)} tiles away from [blue]{MAP_GRID[WIN_LOCATION]}[/]")
-    print(emoji.emojize(f":globe_with_meridians: {compass}"))
-    return compass
+    print(emoji.emojize(f":globe_with_meridians: {location_compass}\n"))
+
+    distance_from_ending_sword = abs(CURRENT_POSITION - SWORD_LOCATION)
+    sword_compass = ""
+    if distance_from_ending_sword < 40:
+        sword_compass = "To the West, or the North...who knows?"
+    elif distance_from_ending_sword >= 41:
+        sword_compass = "Likely to the East or South, that is for you to discover!"
+    elif distance_from_ending_sword == 0:
+        sword_compass = "It looks like you are standing in it? You did find the Umbra Sword didn't you?"
+    console.print(f"You are currently {abs(distance_from_ending_sword)} tiles away from [blue]THE UMBRA SWORD[/]")
+    print(emoji.emojize(f":globe_with_meridians: {sword_compass}\n"))
+    return sword_compass
 
 # Player Navigation
 def player_nav(move):
