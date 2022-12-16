@@ -22,6 +22,7 @@ CURRENT_PLAYER_CLASS = None
 PLAYER_HAS_WIN_CONDITION = False
 PLAYER_ENCOUNTER = False
 
+
 # Global Information about Monster
 # Random values are used as placeholders and to initialise the varaible
 # Real values are generated per encounter from the monster subclass
@@ -112,7 +113,9 @@ MAP_GRID = {
     81: "Umbral Stone"
 }
 
+# Player related position Information
 CURRENT_POSITION = 40
+WIN_LOCATION = 81
 
 # List of Enemy Types
 ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant]
@@ -270,6 +273,8 @@ def player_nav(move):
     """
     global CURRENT_POSITION
     console.print(f"[bold]You are currently in :[/] [blue]{MAP_GRID[CURRENT_POSITION]}\n[/]")
+    console.print(f"[bold]The Win location is :[/] [blue]{MAP_GRID[WIN_LOCATION]}\n[/]")
+    print(CURRENT_POSITION is WIN_LOCATION)
    
     if move == 'Left':
         # error handling in here
@@ -390,7 +395,7 @@ def main():
     menu_entry_index = terminal_menu.show()
     print(f"You have selected {options[menu_entry_index]}!")
     player_class_selection(options[menu_entry_index])
-    while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False:
+    while PLAYER_HAS_WIN_CONDITION is False and PLAYER_ENCOUNTER is False and CURRENT_POSITION is not WIN_LOCATION:
         move_list = ["Left", "Right", "Up", "Down", "Search"]
         command_menu = TerminalMenu(move_list)
         display_move_list = command_menu.show()
@@ -401,8 +406,21 @@ def main():
             while MONSTER_HP > 0:
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
-    if PLAYER_HAS_WIN_CONDITION is True:
-        print("Congratulations!")
+    while PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False and CURRENT_POSITION is not WIN_LOCATION:
+        print(f"Congratulations! You found the Umbra Sword!")
+        print(f"Take it to {WIN_LOCATION} as soon as possible!")
+        move_list_ending = ["Left", "Right", "Up", "Down"]
+        command_menu_ending = TerminalMenu(move_list_ending)
+        display_move_list_ending = command_menu_ending.show()
+        print(f"You have selected {move_list_ending[display_move_list_ending]}.")
+        player_nav(move_list_ending[display_move_list_ending])
+        player_enters_location()
+        if PLAYER_ENCOUNTER is True:
+            while MONSTER_HP > 0:
+                monster_attack(MONSTER_DMG)
+                player_attack(PLAYER_DMG)
+    if PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False and CURRENT_POSITION is WIN_LOCATION:
+        print(f"Congratulations! You have returned the sword to it's rightful place! Thanks for playing.")
 
 
 if __name__ == "__main__":
