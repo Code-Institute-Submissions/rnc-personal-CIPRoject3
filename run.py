@@ -241,7 +241,7 @@ def search_area():
     if find_chance in range(95, 99):
         randomised_loot_choice = LOOT_LIST[4]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
-    if find_chance < 100 and CURRENT_POSITION is SWORD_LOCATION:
+    if find_chance <= 100 and CURRENT_POSITION is SWORD_LOCATION:
         randomised_loot_choice = OBJECTIVE
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
         console.print(f"[yellow]You found the {instanced_loot.name}![/]")
