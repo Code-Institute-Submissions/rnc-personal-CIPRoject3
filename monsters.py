@@ -1,4 +1,6 @@
-# ENEMY_LIST = [Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant ]
+# ENEMY_LIST = [
+# Goblin, Rat, Skeleton, Zombie, Dragon,
+#  Knight, Wizard, Orc, Troll, Giant ]
 class Monster():
     """Creates an instance of Monster"""
     def __init__(self, name, monster_hp, base_dmg):
