@@ -25,7 +25,7 @@ class StandardHealthPotion(Loot):
     def __init__(self, name, mod_value):
         super().__init__(name, mod_value)
         self.name = "Standard HP Potion"
-        self.mod_value = 2 + mod_value
+        self.mod_value = 12 + mod_value
 
 
 class FullHealthRestore(Loot):
