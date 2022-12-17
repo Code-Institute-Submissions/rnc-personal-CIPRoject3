@@ -6,8 +6,10 @@ import random
 from simple_term_menu import TerminalMenu
 import emoji
 from rich.console import Console
-from monsters import Goblin, Rat, Skeleton, Zombie, Dragon, Knight, Wizard, Orc, Troll, Giant
-from items import MinorHealthPotion, StandardHealthPotion, FullHealthRestore, MaxHealthUp, WeaponUp, UmbraSword
+from monsters import Goblin, Rat, Skeleton, Zombie, Dragon
+from monsters import Knight, Wizard, Orc, Troll, Giant
+from items import MinorHealthPotion, StandardHealthPotion
+from items import FullHealthRestore, MaxHealthUp, WeaponUp, UmbraSword
 
 # Setup for Rich Library for Styling the terminal
 console = Console()
@@ -129,6 +131,7 @@ OBJECTIVE = UmbraSword
 Player Setup
 """
 
+
 def player_class_selection(player_class):
     """
     Sets the HP/DMG values for the player class
@@ -217,7 +220,7 @@ def search_area():
     global PLAYER_ENCOUNTER
     global SWORD_LOCATION
     global CURRENT_POSITION
-    
+
     find_chance = legendary_weighted_dice_roll()
     print(f"You scout the area, and score {find_chance}")
     # Initialising RNG for Item - Dice roll score decides which item is found
@@ -225,7 +228,7 @@ def search_area():
     instanced_loot = None
     # Chooses an item based on the dice roll / 100. Gaps in ranges left intentionally for balance
     # This is to prevent repeated searching and grinding up player statistics by repeated searches
-    
+
     if find_chance in range(1, 35):
         randomised_loot_choice = LOOT_LIST[0]
         instanced_loot = randomised_loot_choice("Loot", randint(1, 6))
@@ -298,6 +301,7 @@ def use_map():
     console.print(f"You are currently {abs(distance_from_ending_sword)} tiles away from [blue]THE UMBRA SWORD[/]")
     print(emoji.emojize(f":globe_with_meridians: {sword_compass}\n"))
     return sword_compass
+
 
 # Player Navigation
 def player_nav(move):
@@ -454,7 +458,7 @@ def main():
                 monster_attack(MONSTER_DMG)
                 player_attack(PLAYER_DMG)
     while PLAYER_HAS_WIN_CONDITION is True and PLAYER_ENCOUNTER is False:
-        print(f"Congratulations! You found the Umbra Sword!")
+        print("Congratulations! You found the Umbra Sword!")
         print(f"Take it to {MAP_GRID[WIN_LOCATION]} as soon as possible!")
         move_list_ending = ["Left", "Right", "Up", "Down", 'Look at Map']
         command_menu_ending = TerminalMenu(move_list_ending)
@@ -469,6 +473,7 @@ def main():
         if VICTORY is True:
             print("Congratulations! You have returned the sword to it's rightful place! Thanks for playing.")
             return VICTORY
+
 
 if __name__ == "__main__":
     main()
